@@ -1,15 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# In[ ]:
-
-
-"C:/Users/MapaM/OneDrive/osint-fraud-framework/USAF_PFIF_Tree.csv"
-
-
 # In[2]:
-
-
 import os
 import json
 import pandas as pd
