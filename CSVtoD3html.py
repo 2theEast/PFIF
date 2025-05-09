@@ -1,25 +1,28 @@
 #!/usr/bin/env python
 # coding: utf-8
+
+# In[ ]:
+
+
+"C:/Users/MapaM/OneDrive/osint-fraud-framework/USAF_PFIF_Tree.csv"
+
+
 # In[2]:
+
+
 import os
 import json
 import pandas as pd
 from urllib.parse import urlparse
 
+# --- Config ---
 csv_path = "C:/Users/MapaM/OneDrive/osint-fraud-framework/USAF_PFIF_Tree.csv"
 
-# Step 1: Load the raw CSV file
-df = pd.read_csv(csv_path)
+# --- Helpers ---
 
-# Step 2: Clean all column headers by stripping whitespace and converting to lowercase
-df.columns = df.columns.str.strip().str.lower()
-
-# Step 3: Preview the headers to confirm cleanup
-print("Cleaned column headers:", df.columns.tolist())
-
-# Step 4: Clean the 'url' field by extracting the base domain only
 def sanitize_url(url):
-    if not isinstance(url, str) or url.strip() == "" or url.lower() in ["nan", "none"]:
+    """Extract base domain from URL or mark as 'Unavailable'."""
+    if not isinstance(url, str) or url.strip() == "" or url.lower() in {"nan", "none"}:
         return "Unavailable"
     try:
         parsed = urlparse(url)
@@ -27,11 +30,109 @@ def sanitize_url(url):
     except Exception:
         return "Unavailable"
 
-# Step 5: Apply the cleaning to a new column
+def clean_hierarchy_columns(df, columns=["parent", "child", "subchild"]):
+    """Normalize hierarchy values and remove junk placeholders."""
+    invalid_values = {"", "unknown", "n/a", "null", "none", "unavailable"}
+
+    def normalize(value):
+        if not isinstance(value, str):
+            return None
+        value = value.strip().lower()
+        return None if value in invalid_values else value.strip()
+
+    for col in columns:
+        if col in df.columns:
+            df[col] = df[col].apply(normalize)
+    return df
+
+def build_tree_from_clean_df(df):
+    """Build nested hierarchy for D3.js based on cleaned data."""
+    root = {"name": "Start Here", "children": []}
+    parent_dict = {}
+
+    for _, row in df.iterrows():
+        p = row["parent"]
+        c = row.get("child")
+        s = row.get("subchild")
+        resource = row["resource_name"]
+        tooltip = row.get("tooltip", "")
+        url = row.get("clean_url", "Unavailable")
+
+        if p not in parent_dict:
+            parent_node = {"name": p, "children": []}
+            parent_dict[p] = parent_node
+            root["children"].append(parent_node)
+        else:
+            parent_node = parent_dict[p]
+
+        if not c:
+            target_node = parent_node
+        else:
+            child_node = next((n for n in parent_node["children"] if n["name"] == c), None)
+            if not child_node:
+                child_node = {"name": c, "children": []}
+                parent_node["children"].append(child_node)
+
+            if s:
+                sub_node = next((n for n in child_node["children"] if n["name"] == s), None)
+                if not sub_node:
+                    sub_node = {"name": s, "children": []}
+                    child_node["children"].append(sub_node)
+                target_node = sub_node
+            else:
+                target_node = child_node
+
+        resource_node = {
+            "name": resource,
+            "tooltip": tooltip,
+            "url": url
+        }
+        target_node.setdefault("children", []).append(resource_node)
+
+    def prune_empty(node):
+        if "children" in node:
+            node["children"] = [prune_empty(child) for child in node["children"]]
+            node["children"] = [child for child in node["children"] if child is not None]
+            if not node["children"]:
+                node.pop("children")
+        return node
+
+    return prune_empty(root)
+
+def has_unknowns(node):
+    """Recursively check for any node with 'name': 'unknown'."""
+    if str(node.get("name", "")).strip().lower() == "unknown":
+        return True
+    return any(has_unknowns(child) for child in node.get("children", []))
+
+
+# --- Main Workflow ---
+
+# Step 1: Load and clean the CSV
+df = pd.read_csv(csv_path)
+df.columns = df.columns.str.strip().str.lower()
+
+# Step 2: Normalize URLs
 df["clean_url"] = df["url"].apply(sanitize_url)
 
-# Step 6: Preview a few records
-df.head()
+# Step 3: Clean hierarchy fields
+cleaned_df = clean_hierarchy_columns(df.copy())
+
+# Step 4: Build final hierarchical tree
+final_tree = build_tree_from_clean_df(cleaned_df)
+
+# Step 5: Final validation
+if has_unknowns(final_tree):
+    print("⚠️ Tree still contains 'unknown' nodes.")
+else:
+    print("✅ Tree cleaned successfully. No 'unknown' entries remain.")
+
+# Optional: Save as JSON
+json_output_path = os.path.splitext(csv_path)[0] + "_tree.json"
+with open(json_output_path, "w", encoding="utf-8") as f:
+    json.dump(final_tree, f, indent=2)
+
+print(f"Tree saved to: {json_output_path}")
 
 
 # In[3]:
@@ -43,34 +144,24 @@ print("Available columns after cleaning:", df.columns.tolist())
 # In[4]:
 
 
-# Step 1: Check for missing or unexpected values
-print("Unique Parent Categories:\n", df['parent'].value_counts(), "\n")
-print("Unique Child Categories:\n", df['child'].value_counts(), "\n")
-
-# Only try subchild if it exists
-if "subchild" in df.columns:
-    print("Unique Subchild Names:\n", df['subchild'].value_counts(), "\n")
-else:
-    print("No 'subchild' column found. Proceeding without it.\n")
-
-# Step 2: Fill missing values only for columns that exist
-for col in ['parent', 'child', 'subchild']:
-    if col in df.columns:
-        df[col].fillna("Unknown", inplace=True)
-# Step 3: Build hierarchical tree for D3.js with multiple top-level parents
+# Build a clean hierarchical tree from DataFrame
 def build_tree(df):
-    root = {"name": "PFIF", "children": []}  # Neutral root
+    root = {"name": "PFIF", "children": []}
     parent_dict = {}
 
     for _, row in df.iterrows():
-        p = row["parent"]
-        c = row["child"]
-        s = row["subchild"] if "subchild" in df.columns else None
-        r = row["resource_name"]
-        tooltip = row.get("tooltip", "")
-        url = row.get("clean_url", "Unavailable")
+        p = row.get("parent", "").strip()
+        c = row.get("child", "").strip()
+        s = row.get("subchild", "").strip() if "subchild" in df.columns else ""
+        r = row["resource_name"].strip()
+        tooltip = row.get("tooltip", "").strip()
+        url = row.get("clean_url", "Unavailable").strip()
 
-        # Add parent node
+        # Skip if required fields are missing
+        if not p or p.lower() == "unknown":
+            continue
+
+        # Add or get parent node
         if p not in parent_dict:
             parent_node = {"name": p, "children": []}
             parent_dict[p] = parent_node
@@ -78,41 +169,34 @@ def build_tree(df):
         else:
             parent_node = parent_dict[p]
 
-        # Add child node
-        child_node = next((item for item in parent_node["children"] if item["name"] == c), None)
-        if not child_node:
-            child_node = {"name": c, "children": []}
-            parent_node["children"].append(child_node)
+        # Initialize target node as parent
+        target_node = parent_node
 
-        # Optional: Add subchild if it exists
-        if s and s != r:
-            subchild_node = {"name": s, "children": [{
-                "name": r,
-                "tooltip": tooltip,
-                "url": url
-            }]}
-            child_node["children"].append(subchild_node)
-        else:
-            resource_node = {
-                "name": r,
-                "tooltip": tooltip,
-                "url": url
-            }
-            child_node["children"].append(resource_node)
+        # Add or get child node if valid
+        if c and c.lower() != "unknown":
+            child_node = next((n for n in parent_node["children"] if n["name"] == c), None)
+            if not child_node:
+                child_node = {"name": c, "children": []}
+                parent_node["children"].append(child_node)
+            target_node = child_node
+
+            # Add or get subchild node if valid and distinct from resource
+            if s and s.lower() != "unknown" and s != r:
+                sub_node = next((n for n in child_node["children"] if n["name"] == s), None)
+                if not sub_node:
+                    sub_node = {"name": s, "children": []}
+                    child_node["children"].append(sub_node)
+                target_node = sub_node
+
+        # Add the resource node to the final target
+        resource_node = {
+            "name": r,
+            "tooltip": tooltip,
+            "url": url
+        }
+        target_node["children"].append(resource_node)
 
     return root
-
-
-# Step 4: Build the tree
-tree_data = build_tree(df)
-
-# Step 5: Save cleaned hierarchical JSON
-with open("cleaned_pfif_tree.json", "w") as f:
-    json.dump(tree_data, f, indent=2)
-
-# Optional: Preview JSON output
-print(json.dumps(tree_data, indent=2)[:1000])
-
 
 
 # In[5]:
@@ -172,24 +256,29 @@ print("Unique Parent Values:")
 print(df["parent"].value_counts())
 
 
-# In[39]:
+# In[9]:
 
 
-# Build hierarchical structure for D3.js with proper field usage
-def build_tree_from_df(df):
-    # Root of the tree
-    root = {"name": "Start Here", "children": []}  # or "Root" or "Procurement Fraud Investigation Framework"
+# Clean your DataFrame first
+cleaned_df_full = clean_hierarchy_columns(df.copy(), columns=["parent", "child", "subchild"])
+
+# Then build the tree
+final_tree = build_tree_from_clean_df(cleaned_df_full)
+
+# Updated tree builder that handles pre-cleaned DataFrame
+def build_tree_from_clean_df(df):
+    root = {"name": "Start Here", "children": []}
     parent_dict = {}
 
     for _, row in df.iterrows():
         p = row["parent"]
-        c = row["child"]
-        s = row.get("subchild", "")  # Optional 3rd level
+        c = row.get("child")
+        s = row.get("subchild")
         resource = row["resource_name"]
         tooltip = row.get("tooltip", "")
-        url = row.get("clean_url", "Unavailable")
+        url = row.get("url", "Unavailable")
 
-        # Create parent node if not exists
+        # Get or create parent node
         if p not in parent_dict:
             parent_node = {"name": p, "children": []}
             parent_dict[p] = parent_node
@@ -197,44 +286,53 @@ def build_tree_from_df(df):
         else:
             parent_node = parent_dict[p]
 
-        # Get or create child under parent
-        child_node = next((item for item in parent_node["children"] if item["name"] == c), None)
-        if not child_node:
-            child_node = {"name": c, "children": []}
-            parent_node["children"].append(child_node)
-
-        # Get or create subchild under child (optional level)
-        if s:
-            sub_node = next((item for item in child_node["children"] if item["name"] == s), None)
-            if not sub_node:
-                sub_node = {"name": s, "children": []}
-                child_node["children"].append(sub_node)
+        # Determine where to attach the resource
+        if not c:
+            target_node = parent_node
         else:
-            sub_node = child_node
+            # Get/create child node
+            child_node = next((n for n in parent_node["children"] if n["name"] == c), None)
+            if not child_node:
+                child_node = {"name": c, "children": []}
+                parent_node["children"].append(child_node)
 
-        # Append the resource node to the correct level
+            if s:
+                # Get/create subchild node
+                sub_node = next((n for n in child_node["children"] if n["name"] == s), None)
+                if not sub_node:
+                    sub_node = {"name": s, "children": []}
+                    child_node["children"].append(sub_node)
+                target_node = sub_node
+            else:
+                target_node = child_node
+
+        # Add the resource node
         resource_node = {
             "name": resource,
             "tooltip": tooltip,
             "url": url
         }
-        sub_node["children"].append(resource_node)
+        target_node.setdefault("children", []).append(resource_node)
 
-    return root
+    # Prune empty children
+    def prune_empty(node):
+        if "children" in node:
+            node["children"] = [prune_empty(child) for child in node["children"]]
+            node["children"] = [child for child in node["children"] if child is not None]
+            if not node["children"]:
+                node.pop("children")
+        return node
+
+    return prune_empty(root)
+
+# Rebuild tree with the updated function
+final_tree = build_tree_from_clean_df(cleaned_df_full)
+
+# Confirm final check
+has_unknowns(final_tree)
 
 
-# Build the tree from the cleaned DataFrame
-tree_data = build_tree_from_df(df)
-
-# Save to JSON file
-with open("cleaned_pfif_tree.json", "w") as f:
-    json.dump(tree_data, f, indent=2)
-
-# Optional preview
-print(json.dumps(tree_data, indent=2)[:1000])
-
-
-# In[40]:
+# In[10]:
 
 
 #| **Section**                    | **Customization**                        |
@@ -249,7 +347,7 @@ print(json.dumps(tree_data, indent=2)[:1000])
 #| `tooltip.html(d.data.tooltip)` | Use richer HTML content or conditionals  |
 
 
-# In[45]:
+# In[14]:
 
 
 # HTML template with instructional comments for customization
@@ -318,17 +416,26 @@ header {
       margin: 2em;                /* Adjust spacing around tree */
     }
 
-    /* === TOOLTIP STYLING === */
-    .tooltip {
-      position: absolute;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      padding: 5px;
-      font-size: 12px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
+ /* === TOOLTIP STYLING === */
+.tooltip {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 8px;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  /* Added for better readability and wrapping */
+  max-width: 300px;           /* Optional: limit width */
+  white-space: normal;        /* Enables wrapping */
+  word-wrap: break-word;      /* Break long words if needed */
+  line-height: 1.4;           /* Improve line spacing */
+  border-radius: 4px;         /* Optional: rounded corners */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Optional: subtle shadow */
+}
+
   </style>
 </head>
 <body>
@@ -376,30 +483,35 @@ header {
     root.x0 = dy / 2;
     root.y0 = 0;
     root.descendants().forEach((d, i) => {
-      d.id = i;
-      d._children = d.children;
-
-      // Customize this filter to collapse nodes based on logic
-      if (d.depth && d.data.name.length !== 7) d.children = null;
+    d.id = i;
+    d._children = d.children;
+    if (d.depth > 0) d.children = null; // collapse all nodes except root
     });
 
     // === SVG SETUP ===
-    const svg = d3.select("#tree-container")
-      .attr("viewBox", [-dy / 3, -dx * 10, width, 600]) // Adjust view box to fit content
-      .style("font", "10px sans-serif")
-      .style("user-select", "none");
+// === SVG SETUP WITH ZOOM ===
+const svg = d3.select("#tree-container")
+  .attr("viewBox", [-dy / 3, -dx * 10, width, 600])
+  .style("font", "10px sans-serif")
+  .style("user-select", "none");
 
-    // === LINK GROUP ===
-    const gLink = svg.append("g")
-      .attr("fill", "none")
-      .attr("stroke", "#4B9CD3")             // Line color between nodes
-      .attr("stroke-opacity", 0.4)
-      .attr("stroke-width", 1.5);
+// === Enable Zoom Behavior ===
+svg.call(d3.zoom()
+  .scaleExtent([0.1, 3])
+  .on("zoom", (event) => {
+    gZoom.attr("transform", event.transform);
+  }));
 
-    // === NODE GROUP ===
-    const gNode = svg.append("g")
-      .attr("cursor", "pointer")
-      .attr("pointer-events", "all");
+// === Group for Zoomable Content ===
+const gZoom = svg.append("g");
+const gLink = gZoom.append("g")
+  .attr("fill", "none")
+  .attr("stroke", "#4B9CD3")   // Line color between nodes
+  .attr("stroke-opacity", 0.4)
+  .attr("stroke-width", 1.5);
+const gNode = gZoom.append("g")
+  .attr("cursor", "pointer")
+  .attr("pointer-events", "all");
 
     const tooltip = d3.select("#tooltip");
 
@@ -411,15 +523,16 @@ header {
 
       tree(root);
 
-      // === DYNAMIC TREE HEIGHT ===
-      let left = root, right = root;
-      root.eachBefore(node => {
-        if (node.x < left.x) left = node;
-        if (node.x > right.x) right = node;
-      });
+// === CENTER ON FURTHEST RIGHT NODE ===
+const rightmost = root.descendants().reduce((a, b) => a.y > b.y ? a : b);
+svg.call(
+  d3.zoom().transform,
+  d3.zoomIdentity.translate(width / 2 - rightmost.y, 0)
+);
 
       const transition = svg.transition().duration(duration)
-        .attr("viewBox", [-dy / 3, left.x - dx * 2, width, right.x - left.x + dx * 4]);
+        .attr("viewBox", [-dy / 3, -dx * 10, width, dx * 20]) // Set an initial guess height; will be overwritten by `update()`
+
 
       // === NODE JOIN ===
       const node = gNode.selectAll("g").data(nodes, d => d.id);
@@ -501,11 +614,11 @@ header {
 """
 
 
-# In[46]:
+# In[15]:
 
 
 # Convert tree to JSON string and embed into HTML
-tree_json = json.dumps(tree_data, indent=2)
+tree_json = json.dumps(final_tree, indent=2)
 final_html = html_template.replace("<<TREE_JSON>>", tree_json)
 
 # Save to the same directory as the input CSV
@@ -514,18 +627,3 @@ with open(output_path, "w", encoding="utf-8") as f:
     f.write(final_html)
 
 print(f"✅ HTML file created:\n{output_path}")
-
-
-
-# In[1]:
-
-
-import os
-os.getcwd()
-
-
-# In[ ]:
-
-
-
-
