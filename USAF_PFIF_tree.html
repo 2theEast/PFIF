@@ -3,14 +3,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Procurement Fraud Investigation Framework</title>
+  <title>USAF Procurement Fraud Investigation Framework (PFIF)</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
-    header { background-color: #003366; color: white; padding: 1em; text-align: center; }
-    header a { color: #00ffff; text-decoration: underline; }
-    #tree-container { margin: 2em; }
-    .last-updated { font-size: 0.9em; margin-top: 0.5em; color: #ccc; }
-    .node { cursor: pointer; }
+    /* === GLOBAL STYLES === */
+    body {
+      font-family: Roboto, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .header-date {
+      font-size: 0.9em;
+      color: #cccccc;
+      margin-left: 1em;
+    }
+
+    /* === HEADER STYLING === */
+header {
+  background-color: #003366;
+  color: white;
+  padding: 1em;
+}
+
+/* New flex container for header layout */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* for smaller screens */
+}
+
+.header-title {
+  font-size: 1.5em;
+  flex: 2;
+  text-align: center
+}
+
+.header-date {
+  font-size: 0.9em;
+  color: #FFFFFF;
+  flex: 1;
+  padding-left: 1em;
+  font-style: italic;
+}
+
+.header-contact {
+  flex: 1;
+  text-align: right;
+}
+
+.header-contact a {
+  color: #4B9CD3;
+  text-decoration: underline;
+  font-size: 0.95em;
+}
+
+    /* === TREE CONTAINER === */
+    #tree-container {
+      margin: 2em;                /* Adjust spacing around tree */
+    }
+
+    /* === TOOLTIP STYLING === */
     .tooltip {
       position: absolute;
       background-color: #fff;
@@ -24,1275 +77,2812 @@
   </style>
 </head>
 <body>
-  <header><h1>Procurement Fraud Investigation Framework (PFIF)</h1></header>
-  <div class="legend"><strong>Legend:</strong> Access Type: Cost: (C) Public: (P) PKI: (I)</div>
-  <svg id="tree-container"></svg>
+  
+  <!-- === PAGE HEADER === -->
+<header>
+  <div class="header-container">
+    <div class="header-date">Data as of: May 9, 2025</div>
+    <div class="header-title">Procurement Fraud Investigation Framework (PFIF)</div>
+    
+    <div class="header-contact">
+      <a href="mailto:john.murray.36@us.af.mil?subject=PFIF%20Update&body=Resource%20Name:%0ADescription%20of%20Tool:%0AURL:">
+        Email an Addition
+      </a>
+    </div>
+  </div>
+</header>
+
+<div style="padding-left: 20px; margin-top: 10px; font-size: 14px;">
+  <p><strong>Legend:<br></strong> Click nodes to expand. <br>Tooltip appears on hover. <br> Click leaf nodes to open resource link. <br>Cost (c) Public (p) PKI (i)
+</div>
+  <!-- === TOOLTIP CONTAINER === -->
   <div id="tooltip" class="tooltip"></div>
+
+  <!-- === TREE SVG CONTAINER === -->
+  <svg id="tree-container"></svg>
+
+  <!-- === D3 LIBRARY === -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
+
   <script>
-    // Placeholder for dynamic data
-    const data =  {
-  "name": "Resources",
+    // === INSERTED JSON TREE STRUCTURE ===
+    const data = {
+  "name": "Start Here",
   "children": [
     {
-      "name": "Entity / Business",
+      "name": "Resources",
       "children": [
         {
-          "name": "314a Request",
-          "tooltip": "Helps to locate financial assets and recent transactions by subjects of money laundering or terrorism financing.  This should not be used as a normal investigative step but only after all other avenues of investigation have been exhausted.  Information is shared with a network of financial institutions, correlated by FinCEN personnel and provided to the requester. Appropriate legal avenues must be followed to obtain the relevant information from the financial institutions. Institutions have 14 days to respond. FinCEN analyst will respond directly to requesting agent.",
-          "url": "nan"
+          "name": "Location",
+          "children": [
+            {
+              "name": "Treasury Enforcement Communication System (TECS)",
+              "tooltip": "CBP passenger data for border crossings (I)",
+              "url": "Unavailable"
+            },
+            {
+              "name": "Accurint - Virtual Crime Center (VCC)",
+              "tooltip": "Search people, vehicles, phones, bookings, virtual identities, &amp; businesses",
+              "url": "avcc.lexisnexisrisk.com"
+            },
+            {
+              "name": "DODAAC",
+              "tooltip": "Use to search Department of Defense Activity Address Code (DoDAAC)",
+              "url": "dodaac.cce.af.mil"
+            },
+            {
+              "name": "Enhanced Law Enforcement Plaform - ELEP/IVR",
+              "tooltip": "Determine all phone carriers historically linked to a number",
+              "url": "lawenforcement.numberportability.com"
+            },
+            {
+              "name": "Core Logic / RealQuest PRO",
+              "tooltip": "Residential property database &amp; real estate assets linked to subject(s)",
+              "url": "pro.realquest.com"
+            },
+            {
+              "name": "Public Records Online Directory | NETRONLINE",
+              "tooltip": "Public records including deeds, mortgages, assessment data, tax details, &amp; parcel maps",
+              "url": "publicrecords.netronline.com"
+            },
+            {
+              "name": "Investigative Forensic Toolbar",
+              "tooltip": "Tools for searching Cell, IP, Wi-Fi, P2P, Legal, Social Networking and other resources",
+              "url": "search.org"
+            },
+            {
+              "name": "Accurint",
+              "tooltip": "Compiles publicly available information on individuals and businesses",
+              "url": "secure.accurint.com"
+            },
+            {
+              "name": "Google Maps",
+              "tooltip": "\u00a0Google Maps.",
+              "url": "www.google.com"
+            },
+            {
+              "name": "Consular Consolidated Database (CCD)",
+              "tooltip": "Provided by the Department of State. Contains Passport and POE passenger information",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "LexisNexis Accurint",
-          "tooltip": "Compiles PII on an individual, as well as finds some company data. Is similar to TLO and CLEAR in terms of information contained in reports generated.",
-          "url": "https://secure.accurint.com/app/bps/main/"
+          "name": "Person",
+          "children": [
+            {
+              "name": "Treasury Enforcement Communication System (TECS)",
+              "tooltip": "CBP passenger data for border crossings (I)",
+              "url": "Unavailable"
+            },
+            {
+              "name": "Accurint - Virtual Crime Center (VCC)",
+              "tooltip": "Search people, vehicles, phones, bookings, virtual identities, &amp; businesses",
+              "url": "avcc.lexisnexisrisk.com"
+            },
+            {
+              "name": "Defense Personnel Records Information Retrieval System (DPRIS)",
+              "tooltip": "Provides access to military members&#39; service records",
+              "url": "dpris.dod.mil"
+            },
+            {
+              "name": "Enhanced Law Enforcement Plaform - ELEP/IVR",
+              "tooltip": "Determine all phone carriers historically linked to a number",
+              "url": "lawenforcement.numberportability.com"
+            },
+            {
+              "name": "Public Access to Court Electronic Records (PACER)",
+              "tooltip": "Court records database, historical court proceedings associated with subject(s)",
+              "url": "pacer.uscourts.gov"
+            },
+            {
+              "name": "Investigative Forensic Toolbar",
+              "tooltip": "Tools for searching Cell, IP, Wi-Fi, P2P, Legal, Social Networking and other resources",
+              "url": "search.org"
+            },
+            {
+              "name": "Accurint",
+              "tooltip": "Compiles publicly available information on individuals and businesses",
+              "url": "secure.accurint.com"
+            },
+            {
+              "name": "Defense Central Index of Investigations (DCII)",
+              "tooltip": "Use to determine if subject(s) have had previous investigations within DoD",
+              "url": "www.dcsa.mil"
+            },
+            {
+              "name": "DoD Law Enforcement Defense Data Exchange (D D-Dex)",
+              "tooltip": "Criminal records information",
+              "url": "www.le-ddex.us"
+            },
+            {
+              "name": "SkopeNow",
+              "tooltip": "Fraud detection tool using social media analysis, people search, background checks, digital records, and reverse lookups. Allows for non-attribution web searching.",
+              "url": "www.skopenow.com"
+            },
+            {
+              "name": "Consular Consolidated Database (CCD)",
+              "tooltip": "Provided by the Department of State. Contains Passport and POE passenger information",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "Bloomberg Terminal",
-          "tooltip": "This a subscription service that provides the law enforcement and intelligence community with accurate, timely data, and sophisticated tools to find vast amounts of corporate data and supply chain information of publicly traded companies worldwide.",
-          "url": "https://www.bloomberg.com/professional/solution/bloomberg-terminal/"
+          "name": "Temporal Marker",
+          "children": [
+            {
+              "name": "Treasury Enforcement Communication System (TECS)",
+              "tooltip": "CBP passenger data for border crossings (I)",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "Comprehensive Financial Investigative Solution (CFIS)",
-          "tooltip": "Automated software to import/analyze financial data and invoices.",
-          "url": "https://aitcfis.com/cfis/"
+          "name": "Financial/Legal",
+          "children": [
+            {
+              "name": "BSA Portal (FinCen)",
+              "tooltip": "\u00a0FinCEN's Bank Secrecy Act and Beneficial Ownership systems.",
+              "url": "bsasearch.fincen.gov"
+            },
+            {
+              "name": "Detailed Earnings Query/Title II & Title XVI Benefits Query",
+              "tooltip": "Detailed earnings records [income and employer information] are maintained by the Social Security Administration (SSA) and the Internal Revenue Service (IRS).  These records provide the quarters and amount of income earned by social security account number holders in the United States as reported to the IRS.    These records are also utilized by SSA Claims Representatives to determine an individual's eligibility to receive disability/retirement (Title II) or supplemental security income (Title XVI) benefits.  Utilization of these records would assist field agents with verifying a targets income and employer.  In addition, these records can assist with identifying any unreported income received by a target in support of workman's compensation and money laundering investigations. These records can also used  to identify, locate, and apprehend fugitive felons.",
+              "url": "www.disability-benefits-help.org"
+            },
+            {
+              "name": "Comprehensive Financial Investigative Solution (CFIS)",
+              "tooltip": "Automated software to import/analyze financial data and invoices.",
+              "url": "aitcfis.com"
+            },
+            {
+              "name": "ISO Claimsearch (National Insurance Crime Bureau)",
+              "tooltip": "Insurance fraud detection database",
+              "url": "claimsearch.iso.com"
+            },
+            {
+              "name": "DOD Grant Awards",
+              "tooltip": "Identify if a PI is getting funding",
+              "url": "dodgrantawards.dtic.mil"
+            },
+            {
+              "name": "Military Service Deposits",
+              "tooltip": "\u00a0Information on making deposits for military service credit.",
+              "url": "myfss.us.af.mil"
+            },
+            {
+              "name": "myPay Web Site",
+              "tooltip": "\u00a0Defense Finance and Accounting Service (DFAS) pay management website.",
+              "url": "mypay.dfas.mil"
+            },
+            {
+              "name": "Public Access to Court Electronic Records (PACER)",
+              "tooltip": "Court records database; find historical court proceedings associated to subject individuals and companies.  Typically costs $0.10 per page.",
+              "url": "pacer.uscourts.gov"
+            },
+            {
+              "name": "PitchBook",
+              "tooltip": "Tracks public and private equity markets, including venture capital, private equity, and M&A.",
+              "url": "pitchbook.com"
+            },
+            {
+              "name": "Accurint/Lexis Nexis",
+              "tooltip": "Commercial database to run names, businesses",
+              "url": "secure.accurint.com"
+            },
+            {
+              "name": "LexisNexis Accurint",
+              "tooltip": "Compiles PII on an individual, as well as finds some company data. Is similar to TLO and CLEAR in terms of information contained in reports generated.",
+              "url": "secure.accurint.com"
+            },
+            {
+              "name": "CX (Executive Director) - OSI Talks - RETIRE FEDERAL (Tammy Flanagan) - All Documents",
+              "tooltip": "\u00a0Documents related to federal retirement.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "Air Force SBIRSTTR",
+              "tooltip": "\u00a0Information about military awards and decorations.",
+              "url": "www.afpc.af.mil"
+            },
+            {
+              "name": "Bloomberg Professional Services",
+              "tooltip": "\u00a0Financial data and news platform.",
+              "url": "www.bloomberg.com"
+            },
+            {
+              "name": "Bloomberg Terminal",
+              "tooltip": "This a subscription service that provides the law enforcement and intelligence community with accurate, timely data, and sophisticated tools to find vast amounts of corporate data and supply chain information of publicly traded companies worldwide.",
+              "url": "www.bloomberg.com"
+            },
+            {
+              "name": "Financial Crimes Enforcement Network (FINCEN)",
+              "tooltip": "\u00a0Financial Crimes Enforcement Network.",
+              "url": "www.fincen.gov"
+            },
+            {
+              "name": "International Bank Account Number Validation (IBAN) Checker",
+              "tooltip": " International Bank Account Number validation \u00a0Tool for validating IBANs.",
+              "url": "www.iban.com"
+            },
+            {
+              "name": "LexisNexis Diligence",
+              "tooltip": "Access to more than 40,000 licensed news sources; 400+ databases of financial and company information; and access to legal history and court cases, including dockets, criminal histories, federal and state agency decisions, jury verdicts, and settlements.",
+              "url": "www.lexisnexis.com"
+            },
+            {
+              "name": "Healthcare : Compare Plans - OPM.gov",
+              "tooltip": " Compare Plans - OPM.gov \u00a0Information on comparing federal employee health insurance plans.",
+              "url": "www.opm.gov"
+            },
+            {
+              "name": "System for Award Management (SAM)",
+              "tooltip": "Determine if and when business was registered",
+              "url": "www.sam.gov"
+            },
+            {
+              "name": "SEC.gov | EDGAR\u2014Search and Access",
+              "tooltip": "\u00a0Securities and Exchange Commission website for searching company filings.",
+              "url": "www.sec.gov"
+            },
+            {
+              "name": "Transaction Record Analysis Center (TRAC) portal",
+              "tooltip": "Its primary purpose is to monitor and analyze cross-border money transfers, particularly those sent from the U.S. to over 20 countries. ",
+              "url": "www.swbtrac.com"
+            },
+            {
+              "name": "USA Spending",
+              "tooltip": "Spending data for USG, combines data from FPDS, SAM, FFATA Subaward",
+              "url": "www.usaspending.gov"
+            },
+            {
+              "name": "314a Request ",
+              "tooltip": "Helps to locate financial assets and recent transactions by subjects of money laundering or terrorism financing.  This should not be used as a normal investigative step but only after all other avenues of investigation have been exhausted.  Information is shared with a network of financial institutions, correlated by FinCEN personnel and provided to the requester. Appropriate legal avenues must be followed to obtain the relevant information from the financial institutions. Institutions have 14 days to respond. FinCEN analyst will respond directly to requesting agent.",
+              "url": "Unavailable"
+            },
+            {
+              "name": "Egmont",
+              "tooltip": "FinCEN is the US Financial Intelligence Unit (FIU) of the Egmont Group. The Egmont Group of Financial Intelligence Units is an international network of 106 jurisdictions that have implemented national centers to collect information on suspicious or unusual financial activity from the financial industry, to analyze the data and make it available to appropriate national authorities and other FIU for combating terrorist funding and other financial crimes.",
+              "url": "Unavailable"
+            },
+            {
+              "name": "FinCEN Query System (FQS)",
+              "tooltip": "Search reported suspicious financial transactions and view intel products built by FinCEN analysts.",
+              "url": "Unavailable"
+            },
+            {
+              "name": "System for Award Management (SAM) Extract",
+              "tooltip": "Specialized request working with GSA OIG to get back-end data of SAM, receive names, bank account recs and more",
+              "url": "Unavailable"
+            },
+            {
+              "name": "US Secret Service eLibrary",
+              "tooltip": "Issuing bank information and contacts for credit cards, search/check for counterfeit checks. Requestor must provide credit card number.",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "Detailed Earnings Query/Title II & Title XVI Benefits Query",
-          "tooltip": "Detailed earnings records [income and employer information] are maintained by the Social Security Administration (SSA) and the Internal Revenue Service (IRS).  These records provide the quarters and amount of income earned by social security account number holders in the United States as reported to the IRS.    These records are also utilized by SSA Claims Representatives to determine an individual's eligibility to receive disability/retirement (Title II) or supplemental security income (Title XVI) benefits.  Utilization of these records would assist field agents with verifying a targets income and employer.  In addition, these records can assist with identifying any unreported income received by a target in support of workman's compensation and money laundering investigations. These records can also used  to identify, locate, and apprehend fugitive felons.",
-          "url": "http://www.disability-benefits-help.org/glossary/detailed-earnings-query"
+          "name": "Law Enforcement Resources",
+          "children": [
+            {
+              "name": "National Crime Information Center (NCIC)",
+              "tooltip": "Criminal records information, as well as gun and vehicle registrations.",
+              "url": "hqosincicact.us.af.mil:8080"
+            },
+            {
+              "name": "Accurint - Virtual Crime Center (VCC)",
+              "tooltip": "\u00a0Accurint's platform for crime analysis.",
+              "url": "avcc.lexisnexisrisk.com"
+            },
+            {
+              "name": "Bureau of Justice Assistance",
+              "tooltip": "\u00a0Login for the Bureau of Justice Assistance.",
+              "url": "bja.ojp.gov"
+            },
+            {
+              "name": "NCIS - Groups",
+              "tooltip": "\u00a0A group page on the NCIS (Naval Criminal Investigative Service) website.",
+              "url": "gisportal.ncis.navy.mil"
+            },
+            {
+              "name": "NCIS",
+              "tooltip": "\u00a0The official website for the Naval Criminal Investigative Service.",
+              "url": "gisportal.ncis.navy.mil"
+            },
+            {
+              "name": "International Association of LE Intelligence Analysts",
+              "tooltip": "\u00a0Website for IALEIA.",
+              "url": "ialeia.org"
+            },
+            {
+              "name": "Enhanced Law Enforcement Platform ( ELEP) & Interactive Voice Response (IVR)",
+              "tooltip": "Determine all phone carriers historically linked to a number, which can help determine what carriers to subpoena for records. ",
+              "url": "lawenforcement.numberportability.com"
+            },
+            {
+              "name": "Policies & Standards | National Criminal Intelligence Resource Center",
+              "tooltip": "\u00a0Resources for criminal intelligence.",
+              "url": "ncirc.bja.ojp.gov"
+            },
+            {
+              "name": "Public Access to Court Electronic Records (PACER)",
+              "tooltip": " Federal Court Records \u00a0Public Access to Court Electronic Records.",
+              "url": "pacer.uscourts.gov"
+            },
+            {
+              "name": "Accurint",
+              "tooltip": "\u00a0LexisNexis Accurint for risk and compliance solutions.",
+              "url": "secure.accurint.com"
+            },
+            {
+              "name": "Lexis+",
+              "tooltip": "\u00a0LexisNexis legal and business research platform.",
+              "url": "signin.lexisnexis.com"
+            },
+            {
+              "name": "Fraud & Corruption Integration Branch (ICRF)",
+              "tooltip": "\u00a0SharePoint site for the Fraud & Corruption Integration Branch.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "Office of Procurement Fraud Investigations - OrgHome",
+              "tooltip": "\u00a0SharePoint site for the Office of Procurement Fraud Investigations.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "PF Det 3 OL-B - CENTCOM JA Legal Opinions in Total (Rec'd from CENTCOM JA) - All Documents",
+              "tooltip": "\u00a0A SharePoint site containing legal opinions from the CENTCOM JA (Central Command Judge Advocate) for PF Det 3 OL-B.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "PF Det 3 OL-B - (AFOSI Lead) Haworth (S), D. Kriner (S), MSCA (S), USG (V) - Foreign Registration Act Violation - All Documents",
+              "tooltip": "\u00a0Documents related to a specific procurement fraud case.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "PF Det 6 - Home",
+              "tooltip": "\u00a0SharePoint site for Procurement Fraud Detachment 6.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "PF Det 6 OL-A - Home",
+              "tooltip": "\u00a0SharePoint site for Procurement Fraud Detachment 6, Operating Location A.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "PF Det 6 OL-C - Home",
+              "tooltip": "\u00a0SharePoint site for Procurement Fraud Detachment 6, Operating Location C.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "PF - Home",
+              "tooltip": "\u00a0Procurement Fraud SharePoint homepage.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "Law Enforcement Enterprise Portal (LEEP)",
+              "tooltip": "Multiple resources for LE and CI investigations include: Virtual Command Center (real-time information sharing on active shooter incidents, terrorist attacks, etc.); JusticeConnect (online forum with experts and colleagues); Active Shooter Resources SIG); N-DEx; National Gang Intelligence Center; eGuardian; and more.",
+              "url": "www.cjis.gov"
+            },
+            {
+              "name": "Law Enforcement Enterprise Portal (LEEP)",
+              "tooltip": "Multiple resources for LE and CI investigations include: Virtual Command Center (real-time information sharing on active shooter incidents, terrorist attacks, etc.); JusticeConnect (online forum with experts and colleagues); Active Shooter Resources SIG); N-DEx; National Gang Intelligence Center; eGuardian; and more.",
+              "url": "www.cjis.gov"
+            },
+            {
+              "name": "Law Enforcement Enterprise Portal (LEEP)",
+              "tooltip": "Multiple resources for LE and CI investigations include: Virtual Command Center (real-time information sharing on active shooter incidents, terrorist attacks, etc.); JusticeConnect (online forum with experts and colleagues); Active Shooter Resources SIG); N-DEx; National Gang Intelligence Center; eGuardian; and more.",
+              "url": "www.cjis.gov"
+            },
+            {
+              "name": "Law Enforcement Enterprise Portal (LEEP)",
+              "tooltip": "Multiple resources for LE and CI investigations include: Virtual Command Center (real-time information sharing on active shooter incidents, terrorist attacks, etc.); JusticeConnect (online forum with experts and colleagues); Active Shooter Resources SIG); N-DEx; National Gang Intelligence Center; eGuardian; and more.",
+              "url": "www.cjis.gov"
+            },
+            {
+              "name": "Internet Crime Complaint Center(IC3)",
+              "tooltip": "\u00a0FBI's IC3 for reporting internet crimes.",
+              "url": "www.ic3.gov"
+            },
+            {
+              "name": "Report Fraud",
+              "tooltip": "\u00a0Government website for reporting fraud.",
+              "url": "www.justice.gov"
+            },
+            {
+              "name": "Procurement Collusion Strike Force",
+              "tooltip": "\u00a0DOJ's Procurement Collusion Strike Force.",
+              "url": "www.justice.gov"
+            },
+            {
+              "name": "DoD Law Enforcement Defense Data Exchange (D D-Dex)",
+              "tooltip": "Law Enforcement Sharing via DOD",
+              "url": "www.le-ddex.us"
+            },
+            {
+              "name": "DoD Law Enforcement Defense Data Exchange (D D-Dex)",
+              "tooltip": "Law Enforcement Exchange program.",
+              "url": "www.le-ddex.us"
+            },
+            {
+              "name": "DoD Law Enforcement Defense Data Exchange (D D-Dex)",
+              "tooltip": "Criminal records information; supplements NCIC checks.",
+              "url": "www.le-ddex.us"
+            },
+            {
+              "name": "NW3C",
+              "tooltip": "\u00a0National White Collar Crime Center.",
+              "url": "www.nw3c.org"
+            },
+            {
+              "name": "Federal Contractor Misconduct Database",
+              "tooltip": "\u00a0Database of federal contractor misconduct.",
+              "url": "www.pogo.org"
+            },
+            {
+              "name": "Transaction Record Analysis Center (TRAC) portal",
+              "tooltip": "\u00a0Transactional Records Access Clearinghouse portal for accessing federal law enforcement data.",
+              "url": "www.swbtrac.com"
+            },
+            {
+              "name": "Treasury Enforcement Communication System (TECS)",
+              "tooltip": "All CBP passenger data for border crossings.  (I)",
+              "url": "Unavailable"
+            },
+            {
+              "name": "Intellectual Property Rights Center (IPRC)",
+              "tooltip": "Business search of import/export/seizure data and deconfliction among IPRC members",
+              "url": "Unavailable"
+            },
+            {
+              "name": "National Insurance Crime Bureau (NICB) License Plate Reader (LPR)",
+              "tooltip": "NICB database capitalizes on LPR technology across the U.S. Consolidated data enables finding missing vehicles or past locations.",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "Egmont",
-          "tooltip": "FinCEN is the US Financial Intelligence Unit (FIU) of the Egmont Group. The Egmont Group of Financial Intelligence Units is an international network of 106 jurisdictions that have implemented national centers to collect information on suspicious or unusual financial activity from the financial industry, to analyze the data and make it available to appropriate national authorities and other FIU for combating terrorist funding and other financial crimes.",
-          "url": "nan"
+          "name": "Product/Part Information",
+          "children": [
+            {
+              "name": "ASA Aviation Stolen Parts Database",
+              "tooltip": "<div>Listing of stolen aircraft parts.</div>",
+              "url": "www.aviationsuppliers.org"
+            },
+            {
+              "name": "UF Faculty \u2013 Florida Semiconductor Institute",
+              "tooltip": "\u00a0Information on faculty at the Florida Semiconductor Institute.",
+              "url": "fsi.institute.ufl.edu"
+            },
+            {
+              "name": "Supply Chain Management (SCM) View",
+              "tooltip": "Find out what AF and DoD program offices are responsible for an NSN, as well as what next higher assemblies and weapon systems an NSN goes into.",
+              "url": "lims-ev.cce.af.mil"
+            },
+            {
+              "name": "Haystack",
+              "tooltip": "Provides part information from 50+ supply part/supply databases in DoD and U.S. Government. Mines Federal Logistics Information System (FLIS) and National and NATO Stock Numbers (NSNs) databases of current and obsolete parts, alternates, and suppliers for military equipment, including current pricing and availability.",
+              "url": "login.ihserc.com"
+            },
+            {
+              "name": "Weapon System Impact Tool (WIST)",
+              "tooltip": "Information to determine which weapons systems an NSN belongs to across the DoD.",
+              "url": "wsit.xsb.com"
+            },
+            {
+              "name": "Hamed Dalir : ECE FLORIDA",
+              "tooltip": " ECE FLORIDA \u00a0Profile of Hamed Dalir, ECE Florida.",
+              "url": "www.ece.ufl.edu"
+            },
+            {
+              "name": "Government Industry Data Exchange Program (GIDEP)",
+              "tooltip": "Technical information shared between companies and USGOV, as well as clearinghouse for counterfeit part alerts for USGOV.",
+              "url": "www.gidep.org"
+            },
+            {
+              "name": "\u00a0Intermodal Logistics Support Management and Reporting Tool (ILSmart)",
+              "tooltip": "\u00a0Intermodal Logistics Support Management and Reporting Tool.",
+              "url": "www.ilsmart.com"
+            },
+            {
+              "name": "NSN Depot",
+              "tooltip": "\u00a0National Stock Number database.",
+              "url": "www.nsndepot.com"
+            },
+            {
+              "name": "Part Target",
+              "tooltip": "\u00a0Parts search engine.",
+              "url": "www.parttarget.com"
+            },
+            {
+              "name": "Product Data Reporting and Evaluation Program (PDREP)",
+              "tooltip": "Product quality deficiency reports (PQDR) for all DoD (may not have all AF).  See JDRS for AF PQDRs.",
+              "url": "www.pdrep.csd.disa.mil"
+            },
+            {
+              "name": "WB Parts",
+              "tooltip": "Commercial & Military Aircraft Parts Supplier - NSN Database",
+              "url": "www.wbparts.com"
+            },
+            {
+              "name": "Abraxas",
+              "tooltip": "Use to pull product numbers for products produced; needed for tracking purposes",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "FinCEN Query System (FQS)",
-          "tooltip": "Search reported suspicious financial transactions and view intel products built by FinCEN analysts.",
-          "url": "nan"
+          "name": "Contract/Procurement",
+          "children": [
+            {
+              "name": "Contractor Reporting Information System (CRIS)",
+              "tooltip": "SAF/GCR case management system for documenting administrative remedy activities.",
+              "url": "www.cris.hq.af.mil"
+            },
+            {
+              "name": "Electronic Subcontracting Reporting System (eSRS)",
+              "tooltip": "Information related to subcontractors.",
+              "url": "www.esrs.gov"
+            },
+            {
+              "name": "System for Award Management (SAM)",
+              "tooltip": "Key contractor information, to include certifications and debarments. ",
+              "url": "www.sam.gov"
+            },
+            {
+              "name": "DataViser",
+              "tooltip": "An AF-built web-based, intuitive tool that pulls from various financial and contracting databases (primarily D&B Worldbase, USASpending, and SAM) and allows a user to quickly create their own link analyses. (c ) ",
+              "url": " afosi.dataviser.net"
+            },
+            {
+              "name": "PEGA / Clarity",
+              "tooltip": "Air Force grant data repository",
+              "url": "bpms.ebs.afrl.af.mil"
+            },
+            {
+              "name": "PEGA / Clarity",
+              "tooltip": "Air Force grant data repository",
+              "url": "bpms.ebs.afrl.af.mil"
+            },
+            {
+              "name": "Procurement Integrated Enterprise Environment (PIEE)",
+              "tooltip": "\u00a0Procurement Integrated Enterprise Environment login.",
+              "url": "cac.piee.eb.mil"
+            },
+            {
+              "name": "Procurement Integrated Enterprise Environment (PIEE)",
+              "tooltip": "Pull Contracts, identify contracting officer, dates, research",
+              "url": "cac.piee.eb.mil"
+            },
+            {
+              "name": "DoD Procurement Toolbox",
+              "tooltip": "\u00a0Resources and tools for DoD procurement professionals.",
+              "url": "dodprocurementtoolbox.com"
+            },
+            {
+              "name": "Federal Funding Accountability and Transparency Act (FFATA) Subaward Reporting System (FSRS)",
+              "tooltip": "Information related to subcontractors.",
+              "url": "fsrs.gov"
+            },
+            {
+              "name": "Contracting Business Intelligence Service (CBIS)",
+              "tooltip": "Create your own AF contract reports using hundreds of query filters; useful to understand contracting activity in an specific area of responsibility.",
+              "url": "lims-ev.cce.af.mil"
+            },
+            {
+              "name": "Procurement Integrated Enterprise Environment (PIEE)",
+              "tooltip": "\u00a0DoD's single, secure platform for procurement.",
+              "url": "piee.eb.mil"
+            },
+            {
+              "name": "Project Management Resource Tools (PMRT)",
+              "tooltip": "Pull reports from AF contract writing systems (includes CLIN CLIN-level data). Like CBIS, useful to understanding contracting activity in your AOR. but more complex to use than CBIS.",
+              "url": "pmrt.altess.army.mil"
+            },
+            {
+              "name": "Contracting Opportunities",
+              "tooltip": "Formerly Federal Business Opportunities (FedBizOpps or FBO); open source USGOV soliciation and contract award system.",
+              "url": "sam.gov"
+            },
+            {
+              "name": "ASD(A) - Defense Pricing & Contracting",
+              "tooltip": "\u00a0Office of the Assistant Secretary of Defense for Acquisition, focusing on pricing and contracting.",
+              "url": "www.acq.osd.mil"
+            },
+            {
+              "name": "Federal Contractor Misconduct Database (FCMD)",
+              "tooltip": "Watchdog website that tracks contractor misconduct, including fraud, poor performance, and noncontract violations.",
+              "url": "www.contractormisconduct.org"
+            },
+            {
+              "name": "Federal Awardee Performance and Integrity Information System (FAPIIS)",
+              "tooltip": "Publicly available data that includes some information from CPARS, focusing more on adverse actions.",
+              "url": "www.fapiis.gov"
+            },
+            {
+              "name": "Federal Procurement Data Source (FPDS)",
+              "tooltip": "Government contract search - search by business",
+              "url": "www.fpds.gov"
+            },
+            {
+              "name": "Federal Procurement Data Source (FPDS)",
+              "tooltip": "Government contract search - search by business",
+              "url": "www.fpds.gov"
+            },
+            {
+              "name": "Federal Procurement Data Source (FPDS)",
+              "tooltip": "Government contract search - search by business",
+              "url": "www.fpds.gov"
+            },
+            {
+              "name": "Product Data Reporting and Evaluation Program (PDREP)",
+              "tooltip": "Product quality deficiency reports (PQDR) for all DoD (may not have all AF).  See JDRS for AF PQDRs.",
+              "url": "www.pdrep.csd.disa.mil"
+            },
+            {
+              "name": "System for Award Management (SAM)",
+              "tooltip": "Determine if and when business was registered",
+              "url": "www.sam.gov"
+            },
+            {
+              "name": "Supplier Performance Risk System",
+              "tooltip": "\u00a0System for assessing supplier performance risk.",
+              "url": "www.sprs.csd.disa.mil"
+            },
+            {
+              "name": "USA Spending",
+              "tooltip": "Spending data for USG, combines data from FPDS, SAM, FFATA Subaward",
+              "url": "www.usaspending.gov"
+            }
+          ]
         },
         {
-          "name": "LexisNexis Diligence",
-          "tooltip": "Access to more than 40,000 licensed news sources; 400+ databases of financial and company information; and access to legal history and court cases, including dockets, criminal histories, federal and state agency decisions, jury verdicts, and settlements.",
-          "url": "https://www.lexisnexis.com/en-us/professional/risk-management/nexis-diligence.page"
+          "name": "OSINT",
+          "children": [
+            {
+              "name": "Authentic8",
+              "tooltip": "Open source searching with masked IP",
+              "url": "a8silo.com"
+            },
+            {
+              "name": "Web of Science",
+              "tooltip": "\u00a0Subscription-based scientific citation indexing service.",
+              "url": "access.clarivate.com"
+            },
+            {
+              "name": "Breaking Defense",
+              "tooltip": "\u00a0News and analysis of the defense industry.",
+              "url": "breakingdefense.com"
+            },
+            {
+              "name": "DefenseScoop | Breaking US Military Tech News, Modern Defense News",
+              "tooltip": "\u00a0News about military technology.",
+              "url": "defensescoop.com"
+            },
+            {
+              "name": "FCW - The Business of Federal Technology",
+              "tooltip": "\u00a0News about federal technology.",
+              "url": "fcw.com"
+            },
+            {
+              "name": "Federal News Network - Helping feds meet their mission.",
+              "tooltip": "\u00a0News for federal employees.",
+              "url": "federalnewsnetwork.com"
+            },
+            {
+              "name": "defense acquisition | Federal News Network",
+              "tooltip": "\u00a0News related to defense acquisition.",
+              "url": "federalnewsnetwork.com"
+            },
+            {
+              "name": "IntelTechniques OSINT Online Search Tool",
+              "tooltip": "\u00a0Collection of OSINT tools.",
+              "url": "inteltechniques.com"
+            },
+            {
+              "name": "Whois Lookup, Domain Availability &amp; IP Search - DomainTools",
+              "tooltip": "\u00a0Tool for looking up domain registration information.",
+              "url": "research.domaintools.com"
+            },
+            {
+              "name": "Contracting Opportunities",
+              "tooltip": "Formerly Federal Business Opportunities (FedBizOpps or FBO); open source USGOV soliciation and contract award system.",
+              "url": "sam.gov"
+            },
+            {
+              "name": "WTOP | Washington\u2019s Top News",
+              "tooltip": "\u00a0Washington DC area news.",
+              "url": "wtop.com"
+            },
+            {
+              "name": "Authentic8 (i)",
+              "tooltip": "Managed attribution tool to mask online presence, specifically that an IP address is coming from an AF, DoD, or USGOV server.",
+              "url": "www.a8silo.com"
+            },
+            {
+              "name": "OUSD A&S Top News Stories",
+              "tooltip": "\u00a0News from the Office of the Under Secretary of Defense for Acquisition and Sustainment.",
+              "url": "www.acq.osd.mil"
+            },
+            {
+              "name": "Automated Precision, Inc. rebrands to API with focus on smart factory - Manufacturing AUTOMATIONManufacturing AUTOMATION",
+              "tooltip": "\u00a0News article about Automated Precision, Inc.",
+              "url": "www.automationmag.com"
+            },
+            {
+              "name": "BBC News",
+              "tooltip": "\u00a0British Broadcasting Corporation news.",
+              "url": "www.bbc.com"
+            },
+            {
+              "name": "Europe Regulators Find AOG Technics Supplied Fake Jet-Engine Spare Parts - Bloomberg",
+              "tooltip": "\u00a0News article about fake jet engine parts.",
+              "url": "www.bloomberg.com"
+            },
+            {
+              "name": "Fake Parts Found on Boeing, Airbus Jets Plague Airlines - Bloomberg",
+              "tooltip": "\u00a0News article about fake aircraft parts.",
+              "url": "www.bloomberg.com"
+            },
+            {
+              "name": "CNN - Breaking News, Latest News and Videos",
+              "tooltip": "\u00a0Cable News Network.",
+              "url": "www.cnn.com"
+            },
+            {
+              "name": "Defense News",
+              "tooltip": "\u00a0News about defense.",
+              "url": "www.defensenews.com"
+            },
+            {
+              "name": "DomainTools - The first place to go when you need to know.",
+              "tooltip": "\u00a0Platform for domain name and IP address research.",
+              "url": "www.domaintools.com"
+            },
+            {
+              "name": "Defense Archives - FedScoop",
+              "tooltip": "\u00a0Defense-related articles from FedScoop.",
+              "url": "www.fedscoop.com"
+            },
+            {
+              "name": "Forbes",
+              "tooltip": "\u00a0Business and financial news.",
+              "url": "www.forbes.com"
+            },
+            {
+              "name": "Glassdoor",
+              "tooltip": "Open source information regarding reviews of companies by current and former employees.",
+              "url": "www.glassdoor.com"
+            },
+            {
+              "name": "Government News, Research and Events for Federal Employees - GovExec.com",
+              "tooltip": "\u00a0News and resources for federal employees.",
+              "url": "www.govexec.com"
+            },
+            {
+              "name": "Janes Defense News",
+              "tooltip": "\u00a0Defense intelligence and analysis.",
+              "url": "www.janes.com"
+            },
+            {
+              "name": "NBC4 Washington",
+              "tooltip": "\u00a0Washington DC area news.",
+              "url": "www.nbcwashington.com"
+            },
+            {
+              "name": "Politics, Policy, Political News- POLITICO",
+              "tooltip": "\u00a0Political news and analysis.",
+              "url": "www.politico.com"
+            },
+            {
+              "name": "Reuters",
+              "tooltip": "\u00a0International news agency.",
+              "url": "www.reuters.com"
+            },
+            {
+              "name": "SBIR.gov",
+              "tooltip": "Information related to all USGOV SBIR and STTR awards.  Includes key information about companies, principal investigators (PI), researchers, university affiliations, and more.",
+              "url": "www.sbir.gov"
+            },
+            {
+              "name": "OPTELLIGENCE LLC | SBIR.gov",
+              "tooltip": "\u00a0Information on OPTELLIGENCE LLC on SBIR.gov.",
+              "url": "www.sbir.gov"
+            },
+            {
+              "name": "SkopeNow",
+              "tooltip": "Fraud detection tool using social media analysis, people search, background checks, digital records, and reverse lookups. Allows for non-attribution web searching.",
+              "url": "www.skopenow.com"
+            },
+            {
+              "name": "US News - Economy",
+              "tooltip": "\u00a0US News & World Report's economics section.",
+              "url": "www.usnews.com"
+            },
+            {
+              "name": "Web of Science",
+              "tooltip": "Information about AF research, including SBIR and STTR awards/grants. Includes key about companies, PI, researchers, university affiliations, possible foreign affiliations, etc.",
+              "url": "www.webofknowledge.com"
+            }
+          ]
         },
         {
-          "name": "Public Access to Court Electronic Records (PACER)",
-          "tooltip": "Court records database; find historical court proceedings associated to subject individuals and companies.  Typically costs $0.10 per page.",
-          "url": "https://pacer.uscourts.gov/"
+          "name": "Training",
+          "children": [
+            {
+              "name": "ACFE-Data Analysis Techniques Fraud",
+              "tooltip": "\u00a0Training materials from the Association of Certified Fraud Examiners on data analysis techniques for fraud detection.",
+              "url": "acfe.com"
+            },
+            {
+              "name": "Digital University",
+              "tooltip": "\u00a0Online learning platform.",
+              "url": "digitalu.af.mil"
+            },
+            {
+              "name": "El-Ghazawi et al v. Optelligence LLC et al 1:2023cv01771 | US District Court for the Eastern District of Virginia | Justia",
+              "tooltip": "2023cv01771 | US District Court for the Eastern District of Virginia | Justia \u00a0Legal case involving Optelligence LLC.",
+              "url": "dockets.justia.com"
+            },
+            {
+              "name": "DoD Procurement Toolbox",
+              "tooltip": "A collection of tools &amp; resources to help you manage, enable, or share procurement information",
+              "url": "dodprocurementtoolbox.com"
+            },
+            {
+              "name": "DoD Procurement Toolbox",
+              "tooltip": "\u00a0Training resources within the DoD Procurement Toolbox.",
+              "url": "dodprocurementtoolbox.com"
+            },
+            {
+              "name": "hselms-portal.acadisonline.com/acadisviewer/login.aspx",
+              "tooltip": "\u00a0Online training portal (likely Homeland Security-related).",
+              "url": "hselms-portal.acadisonline.com"
+            },
+            {
+              "name": "Analytic Mind Project (AMP) - Intellipedia",
+              "tooltip": "\u00a0Information on the Analytic Mind Project.",
+              "url": "intellipedia.intelink.gov"
+            },
+            {
+              "name": "CDASA DoD All-Source Analysis Professional Certification Program - Certified DoD All-Source Analyst I",
+              "tooltip": "\u00a0Information on the CDASA certification program.",
+              "url": "intelshare.intelink.gov"
+            },
+            {
+              "name": "CDASA-I Learning Reference Guide - All Documents",
+              "tooltip": "\u00a0Learning guide for the CDASA-I certification.",
+              "url": "intelshare.intelink.gov"
+            },
+            {
+              "name": "JKO LCMS",
+              "tooltip": "\u00a0Joint Knowledge Online Learning Content Management System.",
+              "url": "jkodirect.jten.mil"
+            },
+            {
+              "name": "eFLETC",
+              "tooltip": "\u00a0Electronic Federal Law Enforcement Training Centers.",
+              "url": "learn.fletc.gov"
+            },
+            {
+              "name": "Microsoft Certified: Power BI Data Analyst Associate - Certifications | Microsoft Learn",
+              "tooltip": " Power BI Data Analyst Associate - Certifications | Microsoft Learn \u00a0Information on the Power BI Data Analyst Associate certification.",
+              "url": "learn.microsoft.com"
+            },
+            {
+              "name": "Air Force myLearning",
+              "tooltip": "\u00a0Air Force's learning management system.",
+              "url": "lms-jets.cce.af.mil"
+            },
+            {
+              "name": "MICT: Request Permissions",
+              "tooltip": " Request Permissions \u00a0Tool for requesting permissions in a system (likely related to Air Force).",
+              "url": "mict.cce.af.mil"
+            },
+            {
+              "name": "U.S. Air Force - MyVector",
+              "tooltip": "\u00a0Career development and mentoring platform for Air Force personnel.",
+              "url": "myvector.us.af.mil"
+            },
+            {
+              "name": "ORION_Training",
+              "tooltip": "\u00a0Training environment for ORION.",
+              "url": "orion-training.test.cce.af.mil"
+            },
+            {
+              "name": "Training -PIEE_WBT",
+              "tooltip": "\u00a0Web-based training for PIEE.",
+              "url": "pieetraining.eb.mil"
+            },
+            {
+              "name": "JKO Training Dashboard - PowerApps",
+              "tooltip": "\u00a0Training dashboard on JKO.",
+              "url": "play.apps.appsplatform.us"
+            },
+            {
+              "name": "TAC-U",
+              "tooltip": "\u00a0Training and certification resource for the DoD acquisition workforce.",
+              "url": "tac.dodiis.mil"
+            },
+            {
+              "name": "Agent Training Library and Academic Sources - I2MS - All Documents",
+              "tooltip": "\u00a0Training materials for agents using I2MS.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "PF Training Dashboard",
+              "tooltip": "\u00a0Procurement Fraud training dashboard.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "DRI&R Training SharePoint Site - Support Point Role - All Documents",
+              "tooltip": "\u00a0A SharePoint site for DRI&R (Disaster Response and Interoperability & Recovery) training, specifically for the Support Point Role.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "Self-Study CPE",
+              "tooltip": "\u00a0Self-study Continuing Professional Education.",
+              "url": "www.acfe.com"
+            },
+            {
+              "name": "Contract and Procurement Fraud",
+              "tooltip": "\u00a0Training on contract and procurement fraud.",
+              "url": "www.acfe.com"
+            },
+            {
+              "name": "ABOUT ARLIS | UMD ARLIS Website",
+              "tooltip": "\u00a0University of Maryland's Applied Research Laboratory for Intelligence and Security website.",
+              "url": "www.arlis.umd.edu"
+            },
+            {
+              "name": "Supply Chain Resilience Certificate | ASCM",
+              "tooltip": "\u00a0Information on the ASCM Supply Chain Resilience Certificate.",
+              "url": "www.ascm.org"
+            },
+            {
+              "name": "CDSE-STEPP",
+              "tooltip": "\u00a0Center for Development of Security Excellence - Security Training, Education, and Professionalization Portal.",
+              "url": "www.cdse.edu"
+            },
+            {
+              "name": "DAU Home",
+              "tooltip": "\u00a0Defense Acquisition University.",
+              "url": "www.dau.edu"
+            },
+            {
+              "name": "dia.mil/FOIA/FOIA-Electronic-Reading-Room/FileId/161442/",
+              "tooltip": "\u00a0Document related to the Defense Intelligence Agency.",
+              "url": "www.dia.mil"
+            },
+            {
+              "name": "AGILE_NewUserGuide_v2_2014-07-23.pdf",
+              "tooltip": "\u00a0User guide for AGILE (needs more context).",
+              "url": "www.dni.gov"
+            },
+            {
+              "name": "Financial Investigation and Analysis Training Program | Federal Law Enforcement Training Centers",
+              "tooltip": "\u00a0Training program at FLETC.",
+              "url": "www.fletc.gov"
+            },
+            {
+              "name": "Fraud Investigator Certificate (FIC) | Federal Law Enforcement Training Centers",
+              "tooltip": "\u00a0Certification program at FLETC.",
+              "url": "www.fletc.gov"
+            },
+            {
+              "name": "Investigative Analysis for Law Enforcement | Federal Law Enforcement Training Centers",
+              "tooltip": "\u00a0Training program at FLETC.",
+              "url": "www.fletc.gov"
+            },
+            {
+              "name": "i2 Analyst Notebook Basic Certification",
+              "tooltip": "\u00a0Certification in i2 Analyst's Notebook.",
+              "url": "www.iaca.net"
+            },
+            {
+              "name": "Group: 0132 Intelligence AF Professionals |milBook Home",
+              "tooltip": " 0132 Intelligence AF Professionals |milBook Home \u00a0milBook group for Air Force intelligence professionals.",
+              "url": "www.milsuite.mil"
+            },
+            {
+              "name": "Foundational Managed Attribution Training | USAF PAI Virtual Training Courses",
+              "tooltip": "\u00a0Air Force Training on Managed Attribution.",
+              "url": "www.milsuite.mil"
+            },
+            {
+              "name": "Leadership Development Courses",
+              "tooltip": "\u00a0Leadership Development Courses.",
+              "url": "www.opm.gov"
+            },
+            {
+              "name": "Course Selection | SBIR.gov",
+              "tooltip": "\u00a0Information on Courses to take to help with SBIR.",
+              "url": "www.sbir.gov"
+            },
+            {
+              "name": "Web of Science",
+              "tooltip": "Information about AF research, including SBIR and STTR awards/grants. Includes key about companies, PI, researchers, university affiliations, possible foreign affiliations, etc.",
+              "url": "www.webofknowledge.com"
+            }
+          ]
         },
         {
-          "name": "US Secret Service eLibrary",
-          "tooltip": "Issuing bank information and contacts for credit cards, search/check for counterfeit checks. Requestor must provide credit card number.",
-          "url": "nan"
+          "name": "Military/Government Systems",
+          "children": [
+            {
+              "name": "ATAAPS",
+              "tooltip": "\u00a0Time and attendance system.",
+              "url": "af.ataaps.csd.disa.mil"
+            },
+            {
+              "name": "Air Force Research Laboratory",
+              "tooltip": "\u00a0The primary scientific research and development center for the Air Force.",
+              "url": "afresearchlab.com"
+            },
+            {
+              "name": "DLA CAGE",
+              "tooltip": "\u00a0Defense Logistics Agency's Commercial and Government Entity (CAGE) code lookup.",
+              "url": "cage.dla.mil"
+            },
+            {
+              "name": "DCPDS Portal - My Biz",
+              "tooltip": "\u00a0Defense Civilian Personnel Data System portal for managing personal information.",
+              "url": "compo.dcpds.cpms.osd.mil"
+            },
+            {
+              "name": "DoD Directory",
+              "tooltip": "\u00a0DoD personnel directory.",
+              "url": "dod411.gds.disa.mil"
+            },
+            {
+              "name": "DODAAC Home",
+              "tooltip": "\u00a0Information on Department of Defense Activity Address Codes (DODAACs).",
+              "url": "dodaac.cce.af.mil"
+            },
+            {
+              "name": "Defense Personnel Records Information Retrieval System (DPRIS)",
+              "tooltip": "Access to military member's service records across all of DoD; supplements ARMS.",
+              "url": "dpris.dod.mil"
+            },
+            {
+              "name": "Defense Personnel Records Information Retrieval System (DPRIS)",
+              "tooltip": "\u00a0Defense Priorities and Allocations System.",
+              "url": "dpris.dod.mil"
+            },
+            {
+              "name": "eOPF_AF",
+              "tooltip": "\u00a0Electronic Official Personnel File system for Air Force personnel.",
+              "url": "eopf.opm.gov"
+            },
+            {
+              "name": "EVMCR Intergrated Program Management Portal",
+              "tooltip": "\u00a0Portal for the Enterprise Visibility and Management of Construction and Remediation (EVMCR) program, likely related to environmental management and construction projects.",
+              "url": "evm.acq.osd.mil"
+            },
+            {
+              "name": "GRB Platform",
+              "tooltip": "\u00a0Government Resource for Business platform.",
+              "url": "grbplatform.us.af.mil"
+            },
+            {
+              "name": "GRB Platform : 1.2.162.10 - DEPARTMENT OF THE AIR FORCE",
+              "tooltip": " 1.2.162.10 - DEPARTMENT OF THE AIR FORCE \u00a0The Government Resource for Business (GRB) platform for the Department of the Air Force.",
+              "url": "grbplatform.us.af.mil"
+            },
+            {
+              "name": "DAASINQ",
+              "tooltip": "\u00a0Defense Automatic Addressing System inquiry.",
+              "url": "home.daas.dla.mil"
+            },
+            {
+              "name": "GVS Service Landing Page | GVS",
+              "tooltip": "\u00a0Government Video and Vision Services",
+              "url": "home.gvs.nga.mil"
+            },
+            {
+              "name": "ID Card Office Online",
+              "tooltip": "\u00a0Website for managing military ID card appointments and information.",
+              "url": "idco.dmdc.osd.mil"
+            },
+            {
+              "name": "Air Force Identity Services",
+              "tooltip": "\u00a0Air Force system for managing digital identities.",
+              "url": "imp.afds.af.mil"
+            },
+            {
+              "name": "Acquisition Intelligence Joint Integration Cell (Acq Intel-JIC) - Intelligence Data Working Group",
+              "tooltip": "\u00a0Group focused on integrating intelligence into the acquisition process.",
+              "url": "intelshare.intelink.gov"
+            },
+            {
+              "name": "Joint Deficiency Reporting System",
+              "tooltip": "\u00a0System for reporting deficiencies in military equipment.",
+              "url": "jdrs.mil"
+            },
+            {
+              "name": "FSS AF Login",
+              "tooltip": "\u00a0Force Support Squadron login portal (likely for various services).",
+              "url": "myfss.us.af.mil"
+            },
+            {
+              "name": "ORION (PROD)",
+              "tooltip": "\u00a0Production environment for ORION (likely a specific system).",
+              "url": "orion.cce.af.mil"
+            },
+            {
+              "name": "DoD Person Search (DPS)",
+              "tooltip": "PII and dependent information for all DoD personnel.",
+              "url": "pki.dmdc.osd.mil"
+            },
+            {
+              "name": "PMRT Login",
+              "tooltip": "\u00a0Program Management Resource Tools login.",
+              "url": "pmrt.cce.af.mil"
+            },
+            {
+              "name": "Welcome to DPC (Civilian Human Resources Management)",
+              "tooltip": "\u00a0Civilian Human Resources management information.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "AFMC AI Info Center",
+              "tooltip": "\u00a0Air Force Materiel Command's AI information center.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "I2MS",
+              "tooltip": "\u00a0Intelligence Information Management System.",
+              "url": "webi2ms.us.af.mil"
+            },
+            {
+              "name": "SECAF Reading List",
+              "tooltip": "\u00a0Suggested reading list from the Secretary of the Air Force.",
+              "url": "www.af.mil"
+            },
+            {
+              "name": "About | Applied Research Laboratory for Intelligence and Security",
+              "tooltip": "\u00a0Research lab focused on intelligence and security.",
+              "url": "www.arlis.umd.edu"
+            },
+            {
+              "name": "Defense Central Index of Investigations (DCII)",
+              "tooltip": "Determine if subject(s) have had previous investigations on them in the past in the DoD.",
+              "url": "www.dcsa.mil"
+            },
+            {
+              "name": "Joint Personnel Adjudication System (JPAS)",
+              "tooltip": "Clearance data for all DoD personnel.",
+              "url": "www.dcsa.mil"
+            },
+            {
+              "name": "DOD Releases 2023 Report on Military and Security Developments Involving the People's Republic of China > U.S. Department of Defense > Release",
+              "tooltip": "\u00a0DoD report on China.",
+              "url": "www.defense.gov"
+            },
+            {
+              "name": "Defense Finance and Accounting Service > CivilianEmployees > militaryservice > militaryservicedeposits",
+              "tooltip": "\u00a0Information on making deposits for military service credit.",
+              "url": "www.dfas.mil"
+            },
+            {
+              "name": "ODNI",
+              "tooltip": "\u00a0Office of the Director of National Intelligence.",
+              "url": "www.dni.gov"
+            },
+            {
+              "name": "Department of the Air Force E-Publishing > Publications + Forms",
+              "tooltip": "\u00a0Official Air Force publications and forms.",
+              "url": "www.e-publishing.af.mil"
+            },
+            {
+              "name": "GSA",
+              "tooltip": "\u00a0General Services Administration website.",
+              "url": "www.gsa.gov"
+            },
+            {
+              "name": "Army HRC",
+              "tooltip": "\u00a0Army Human Resources Command website.",
+              "url": "www.hrc.army.mil"
+            },
+            {
+              "name": "\u00a0Intermodal Logistics Support Management and Reporting Tool (ILSmart)",
+              "tooltip": "\u00a0Intermodal Logistics Support Management and Reporting Tool.",
+              "url": "www.ilsmart.com"
+            },
+            {
+              "name": "Joint Deficiency Reporting System (JDRS)",
+              "tooltip": "All Air Force product quality deficiency reports",
+              "url": "www.jdrs.mil"
+            },
+            {
+              "name": "Automated Records Management System (ARMS)",
+              "tooltip": "Obtain documents from an Air Force member's personnel information file.",
+              "url": "www.my.af.mil"
+            },
+            {
+              "name": "Air Force Personnel Profile",
+              "tooltip": "\u00a0Air Force Personnel profile management.",
+              "url": "www.my.af.mil"
+            },
+            {
+              "name": "U.S. Department of State - United States Department of State",
+              "tooltip": "\u00a0Official website for the U.S. Department of State",
+              "url": "www.state.gov"
+            },
+            {
+              "name": "Supplier Caught Distributing Fake Parts for World\u2019s Top-Selling Jet Engine",
+              "tooltip": "\u00a0News article about fake jet engine parts.",
+              "url": "www.thedrive.com"
+            },
+            {
+              "name": "Official Guide to Government Information and Services | USAGov",
+              "tooltip": "\u00a0Official website for government information and services.",
+              "url": "www.usa.gov"
+            },
+            {
+              "name": "Consular Consolidated Database (CCD)",
+              "tooltip": "Consular Consolidated Database (CCD) is one of the largest Oracle based data warehouses in the world that holds current and archived data from the Consular Affairs (CA) domestic and post databases around the world. As of December 2009, it contains over 100 million visa cases and 75 million photographs, utilizing billions of rows of data, and has a current growth rate of approximately 35 thousand visa cases every day. It was created to provide CA a near real-time aggregate of the consular transaction activity collected domestically and at post databases around the world. The CCD is the IT  implementation that provides for a set of centralized visa and American citizen services supporting consular posts and back office functions.  Utilization of these records would assist field agents with obtaining foreign nationals visa applications and photographs for historical analysis.  In addition, field agents would have access to U.S. Citizens (USC) passport applications and photographs.   ",
+              "url": "Unavailable"
+            },
+            {
+              "name": "Seized Assets and Case Tracking System (SEACATS)",
+              "tooltip": "All CBP import and export seizure data for shipments to and from the U.S.",
+              "url": "Unavailable"
+            },
+            {
+              "name": "Treasury Enforcement Communication System (TECS)",
+              "tooltip": "All CBP passenger data for border crossings.  (I)",
+              "url": "Unavailable"
+            },
+            {
+              "name": "USXPORTS",
+              "tooltip": "All ITAR and dual-use export license application information from State Department, Department of Commerce, and Treasury Department.",
+              "url": "Unavailable"
+            },
+            {
+              "name": "Automated Targeting System",
+              "tooltip": "Obtain all overseas shipment records to/from a subject individual or company; potentially critical information for product substitution cases.",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "Accurint/Lexis Nexis",
-          "tooltip": "Commercial database to run names, businesses",
-          "url": "https://secure.accurint.com/app/bps/main"
+          "name": "Data Analysis & Visualization",
+          "children": [
+            {
+              "name": "DataViser",
+              "tooltip": "An AF-built web-based, intuitive tool that pulls from various financial and contracting databases (primarily D&B Worldbase, USASpending, and SAM) and allows a user to quickly create their own link analyses. (c ) ",
+              "url": "afosi.dataviser.net"
+            },
+            {
+              "name": "Comprehensive Financial Investigative Solution (CFIS)",
+              "tooltip": "Automated software to import/analyze financial data and invoices.",
+              "url": "aitcfis.com"
+            },
+            {
+              "name": "Power BI",
+              "tooltip": "\u00a0Microsoft's business intelligence and data visualization platform.",
+              "url": "app.mil.powerbigov.us"
+            },
+            {
+              "name": "PEGA - AFRL",
+              "tooltip": "\u00a0PEGA platform used at the Air Force Research Laboratory.",
+              "url": "bpms.ebs.afrl.af.mil"
+            },
+            {
+              "name": "Databricks Learning",
+              "tooltip": "\u00a0A learning platform for Databricks, a data analytics and machine learning platform.",
+              "url": "customer-academy.databricks.com"
+            },
+            {
+              "name": "BI launch pad",
+              "tooltip": "\u00a0Business Intelligence Launch Pad (likely a specific software or platform).",
+              "url": "lims-ev.cce.af.mil"
+            },
+            {
+              "name": "PitchBook",
+              "tooltip": "Tracks public and private equity markets, including venture capital, private equity, and M&A.",
+              "url": "pitchbook.com"
+            },
+            {
+              "name": "SmartOSI",
+              "tooltip": "Reports and checks of CACTIS, Legacy I2MS and WI2MS for previous files or activities regarding subjects and investigative trend data.",
+              "url": "tvyx-as-008v.area52.afnoapps.usaf.mil"
+            },
+            {
+              "name": "Test - Fraud Schemes Dashboard *",
+              "tooltip": "\u00a0A test dashboard for visualizing fraud schemes.",
+              "url": "tvyx-as-012v.area52.afnoapps.usaf.mil"
+            },
+            {
+              "name": "OSI Metrics & Reporting",
+              "tooltip": "\u00a0SharePoint site for AFOSI metrics and reporting.",
+              "url": "tvyx-as-012v.area52.afnoapps.usaf.mil"
+            },
+            {
+              "name": "Bloomberg Terminal",
+              "tooltip": "This a subscription service that provides the law enforcement and intelligence community with accurate, timely data, and sophisticated tools to find vast amounts of corporate data and supply chain information of publicly traded companies worldwide.",
+              "url": "www.bloomberg.com"
+            },
+            {
+              "name": "Dataminr Pulse | Real-time Alerts for Enterprise Risk Management",
+              "tooltip": "\u00a0Real-time alert platform for risk management.",
+              "url": "www.dataminr.com"
+            },
+            {
+              "name": "Product Data Reporting and Evaluation Program (PDREP)",
+              "tooltip": "Product quality deficiency reports (PQDR) for all DoD (may not have all AF).  See JDRS for AF PQDRs.",
+              "url": "www.pdrep.csd.disa.mil"
+            },
+            {
+              "name": "Recorded Future",
+              "tooltip": "Keyword searches for information on the dark web.  NOTE: PF is currently running perpetual searches of keywords in this system.",
+              "url": "www.recordedfuture.com"
+            },
+            {
+              "name": "Add Hyperlinks, URLs to a Table or Matrix in Power BI - YouTube",
+              "tooltip": "\u00a0A YouTube video tutorial on adding hyperlinks to tables or matrices in Power BI.",
+              "url": "www.youtube.com"
+            },
+            {
+              "name": "Timeline visuals in Power BI - YouTube",
+              "tooltip": "\u00a0A YouTube video tutorial on using timeline visuals in Power BI.",
+              "url": "www.youtube.com"
+            },
+            {
+              "name": "How to Load a PDF to Your Power BI Dashboard! - YouTube",
+              "tooltip": "\u00a0A YouTube video tutorial on loading a PDF into a Power BI dashboard.",
+              "url": "www.youtube.com"
+            },
+            {
+              "name": "Power Bi : Use Local Images in Power Bi. 3 Different Methods - YouTube",
+              "tooltip": " Use Local Images in Power Bi. 3 Different Methods - YouTube  \u00a0A YouTube video tutorial on using local images in Power BI.",
+              "url": "www.youtube.com"
+            },
+            {
+              "name": "How to automatically load data from multiple excel sheets into Power BI Desktop - YouTube",
+              "tooltip": "\u00a0A YouTube video tutorial on automatically loading data from multiple Excel sheets into Power BI Desktop.",
+              "url": "www.youtube.com"
+            },
+            {
+              "name": "The Best Custom Visual You've Never Heard Of - YouTube",
+              "tooltip": "\u00a0A YouTube video tutorial on a custom visual in Power BI.",
+              "url": "www.youtube.com"
+            }
+          ]
         },
         {
-          "name": "DOD Grant Awards",
-          "tooltip": "Identify if a PI is getting funding",
-          "url": "https://dodgrantawards.dtic.mil/grants/#/advancedSearch"
+          "name": "Contract/Award",
+          "children": [
+            {
+              "name": "DataViser",
+              "tooltip": "An AF-built web-based, intuitive tool that pulls from various financial and contracting databases (primarily D&B Worldbase, USASpending, and SAM) and allows a user to quickly create their own link analyses. (c ) ",
+              "url": "afosi.datavisre.net"
+            },
+            {
+              "name": "AFWERX-Front Page",
+              "tooltip": "\u00a0Air Force innovation program connecting entrepreneurs with the Air Force.",
+              "url": "afwerx.com"
+            },
+            {
+              "name": "PEGA / Clarity",
+              "tooltip": "Air Force grant data repository",
+              "url": "bpms.ebs.afrl.af.mil"
+            },
+            {
+              "name": "Procurement Integrated Enterprise Environment (PIEE)",
+              "tooltip": "Primary enterprise procure-to-pay application for DoD. Contains multiple tools &amp; applications",
+              "url": "cac.piee.eb.mil"
+            },
+            {
+              "name": "DoD Procurement Toolbox",
+              "tooltip": "A collection of tools &amp; resources to help you manage, enable, or share procurement information",
+              "url": "dodprocurementtoolbox.com"
+            },
+            {
+              "name": "Contracting Business Intelligence System (CBIS)",
+              "tooltip": "Pulls reports from the Air Force contract writing systems",
+              "url": "lims-ev.cce.af.mil"
+            },
+            {
+              "name": "Electronic Documents Access (EDA)",
+              "tooltip": "Enables searches for contracts across the DoD",
+              "url": "piee.eb.mil"
+            },
+            {
+              "name": "Project Management Resource Tools (PMRT)",
+              "tooltip": "To pull reports from Air Force contract writing systems (including CLIN level data)",
+              "url": "pmrt.cce.af.mil"
+            },
+            {
+              "name": "DCMA Contract Management Team (CMT)",
+              "tooltip": "DCMA tool - Provides the ability to view CMT for a CAGE or contract that is in one of DCMA sources",
+              "url": "pubmini.dcma.mil"
+            },
+            {
+              "name": "SAM.gov | Home",
+              "tooltip": "\u00a0System for Award Management, the official US government system for entities to register to do business with the government.",
+              "url": "sam.gov"
+            },
+            {
+              "name": "System for Award Management (SAM)",
+              "tooltip": "To look up key contractor information to include certifications and debarments",
+              "url": "sam.gov"
+            },
+            {
+              "name": "Air Force SBIRSTTR",
+              "tooltip": "\u00a0Air Force Small Business Innovation Research/Small Business Technology Transfer program.",
+              "url": "www.afsbirsttr.af.mil"
+            },
+            {
+              "name": "Air Force SBIRSTTR",
+              "tooltip": "\u00a0Air Force SBIR/STTR program information.",
+              "url": "www.afsbirsttr.us"
+            },
+            {
+              "name": "Contractor Performance Assessment Reporting System (CPARS)",
+              "tooltip": "Records contain federal contractor criminal, civil, and administrative proceedings",
+              "url": "www.cpars.gov"
+            },
+            {
+              "name": "Defense SBIR/STTR Innovation Portal (DSIP)",
+              "tooltip": "\u00a0Internal portal for the Defense SBIR/STTR program.",
+              "url": "www.dodsbirsttr.mil"
+            },
+            {
+              "name": "Defense SBIR/STTR Innovation Portal (DSIP)",
+              "tooltip": "\u00a0Internal portal for the Defense SBIR/STTR program.",
+              "url": "www.dodsbirsttr.mil"
+            },
+            {
+              "name": "Electronic Subcontracting Reporting System (eSRS)",
+              "tooltip": "Contains information related to subcontractors",
+              "url": "www.esrs.gov"
+            },
+            {
+              "name": "Federal Awardee Performance and Integrity Information System (FAPIIS)",
+              "tooltip": "Includes information from CPARs &amp; PPIRs - focuses more on adverse actions",
+              "url": "www.fapiis.gov"
+            },
+            {
+              "name": "Federal Procurement Data Source (FPDS)",
+              "tooltip": "Government contract search - search by business",
+              "url": "www.fpds"
+            },
+            {
+              "name": "F108 / CFM56 Engine",
+              "tooltip": "\u00a0Information on the F108/CFM56 engine.",
+              "url": "www.globalsecurity.org"
+            },
+            {
+              "name": "GRANTS.GOV",
+              "tooltip": "\u00a0Official US government website for finding and applying for grants.",
+              "url": "www.grants.gov"
+            },
+            {
+              "name": "SIBR",
+              "tooltip": "Contains information about all SBIR/STTR awards and grants",
+              "url": "www.sbir.gov"
+            },
+            {
+              "name": "SBIR.gov",
+              "tooltip": "\u00a0Official website for the Small Business Innovation Research program.",
+              "url": "www.sbir.gov"
+            },
+            {
+              "name": "About | SBIR.gov",
+              "tooltip": "\u00a0Information on the Small Business Innovation Research (SBIR) program.",
+              "url": "www.sbir.gov"
+            },
+            {
+              "name": "USA Spending",
+              "tooltip": "The official open data source of federal spending information",
+              "url": "www.usaspending.com"
+            }
+          ]
         },
         {
-          "name": "Financial Crimes Enforcement Network (FINCEN)",
-          "tooltip": "Reports of SARs, CTRs, FBARs, 8300 filings from financial institutions",
-          "url": "https://www.fincen.gov"
+          "name": "Entity/Business",
+          "children": [
+            {
+              "name": "DataViser",
+              "tooltip": "An AF-built web-based, intuitive tool that pulls from various financial and contracting databases (primarily D&B Worldbase, USASpending, and SAM) and allows a user to quickly create their own link analyses. (c ) ",
+              "url": "afosi.datavisre.net"
+            },
+            {
+              "name": "BSA Portal (FinCen)",
+              "tooltip": "Search suspicious financial transactions &amp; locate financial assets | 314a Program, Egmont",
+              "url": "bsasearch.fincen.gov"
+            },
+            {
+              "name": "Commercial &amp; Government Entity (CAGE)",
+              "tooltip": "To obtain key data like CAGE codes, UEI, and DUNS numbers for subjects &amp; companies",
+              "url": "cage.dla.mil"
+            },
+            {
+              "name": "DODAAC",
+              "tooltip": "Use to search Department of Defense Activity Address Code (DoDAAC)",
+              "url": "dodaac.cce.af.mil"
+            },
+            {
+              "name": "Supply Chain Management (SCM) View",
+              "tooltip": "Find out what AF and DoD program offices are responsible for an NSN, as well as what next higher assemblies and weapon systems an NSN goes into.",
+              "url": "lims-ev.cce.af.mil"
+            },
+            {
+              "name": "OpenCorpData: Online Corporate Business Database",
+              "tooltip": " Online Corporate Business Database \u00a0Database of corporate information.",
+              "url": "opencorpdata.com"
+            },
+            {
+              "name": "Open Corporates",
+              "tooltip": "\u00a0Another database of corporate information.",
+              "url": "opencorporates.com"
+            },
+            {
+              "name": "Northern Defense Services \u00b7 6767 Nelson Rd, Canastota, NY 13032-4612, USA",
+              "tooltip": "\u00a0Information about Northern Defense Services, a company located in Canastota, NY.",
+              "url": "opengovus.com"
+            },
+            {
+              "name": "Public Access to Court Electronic Records (PACER)",
+              "tooltip": "Court records database, historical court proceedings associated with subject(s)",
+              "url": "pacer.uscourts.gov"
+            },
+            {
+              "name": "Pitchbook",
+              "tooltip": "Tracks public and private equity markets, including venture capital, private equity, and M&A.",
+              "url": "pitchbook.com"
+            },
+            {
+              "name": "\ud83d\udd37 Small Business \"Innovation\"",
+              "tooltip": "\u00a0Information on small business innovation.",
+              "url": "preview.mailerlite.com"
+            },
+            {
+              "name": "Core Logic / RealQuest PRO",
+              "tooltip": "Residential property database &amp; real estate assets linked to subject(s)",
+              "url": "pro.realquest.com"
+            },
+            {
+              "name": "Public Records Online Directory | NETRONLINE",
+              "tooltip": "Public records including deeds, mortgages, assessment data, tax details, &amp; parcel maps",
+              "url": "publicrecords.netronline.com"
+            },
+            {
+              "name": "DCMA Contract Management Team (CMT)",
+              "tooltip": "DCMA tool - Provides the ability to view CMT for a CAGE or contract that is in one of DCMA sources",
+              "url": "pubmini.dcma.mil"
+            },
+            {
+              "name": "Whois Lookup",
+              "tooltip": "Research domain name or IP address ownership",
+              "url": "research.domaintools.com"
+            },
+            {
+              "name": "System for Award Management (SAM)",
+              "tooltip": "To look up key contractor information to include certifications and debarments",
+              "url": "sam.gov"
+            },
+            {
+              "name": "Accurint",
+              "tooltip": "Compiles publicly available information on individuals and businesses",
+              "url": "secure.accurint.com"
+            },
+            {
+              "name": "The Org",
+              "tooltip": "\u00a0Organizational chart database.",
+              "url": "theorg.com"
+            },
+            {
+              "name": "Enterprise Policy - ERP Share Point",
+              "tooltip": "\u00a0OSI Enterprise Policy document.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "About OCEA \u2014 Office of Commercial and Economic Analysis",
+              "tooltip": "\u00a0Information about the Office of Commercial and Economic Analysis.",
+              "url": "www.afocea.com"
+            },
+            {
+              "name": "Federal Contractor Misconduct Database (FCMD)",
+              "tooltip": "Watchdog website that tracks contractor misconduct",
+              "url": "www.contractormisconduct.org"
+            },
+            {
+              "name": "Contractor Performance Assessment Reporting System (CPARS)",
+              "tooltip": "Formerly the Past Performance Information Reporting System (PPIRS). Records contain federal contractor criminal, civil, and administrative proceedings in connection with federal awards; suspensions and debarments; administrative agreements; non -responsibility determinations; terminations for cause or default; defective pricing determinations; termination for material failure to comply; subcontractor payment issues; information on trafficking in persons; and recipient not qualified determinations.",
+              "url": "www.cpars.gov"
+            },
+            {
+              "name": "Contractor Responsibility Information System (CRIS)",
+              "tooltip": "Use to determine if SAF/GCR had a previous file or information on subject(s)",
+              "url": "www.cris.hq.af.mil"
+            },
+            {
+              "name": "What is a D-U-N-S Number?",
+              "tooltip": "\u00a0Information about D-U-N-S numbers.",
+              "url": "www.dnb.com"
+            },
+            {
+              "name": "Electronic Subcontracting Reporting System (eSRS)",
+              "tooltip": "Contains information related to subcontractors",
+              "url": "www.esrs.gov"
+            },
+            {
+              "name": "Federal Awardee Performance and Integrity Information System (FAPIIS)",
+              "tooltip": "Includes information from CPARs &amp; PPIRs - focuses more on adverse actions",
+              "url": "www.fapiis.gov"
+            },
+            {
+              "name": "Glassdoor",
+              "tooltip": "Open source information regarding reviews of companies by current and former employees.",
+              "url": "www.glassdoor.com"
+            },
+            {
+              "name": "NORTHERN DEFENSE SERVICES, Canastota, NEW YORK, NY 13032 - Govcb.com",
+              "tooltip": "\u00a0Information about Northern Defense Services on Govcb.com, a government contracting website.",
+              "url": "www.govcb.com"
+            },
+            {
+              "name": "International Bank Account Number Validation (IBAN) Checker",
+              "tooltip": "Check &amp; validate International Bank Account Numbers for errors",
+              "url": "www.iban.com"
+            },
+            {
+              "name": "Lexis Nexis",
+              "tooltip": "Provider of legal, government, business, and high-tech information sources",
+              "url": "www.lexisnexis.com"
+            },
+            {
+              "name": "Small Business Administration",
+              "tooltip": "\u00a0US government agency supporting small businesses.",
+              "url": "www.sba.gov"
+            },
+            {
+              "name": "Size standards | U.S. Small Business Administration",
+              "tooltip": "\u00a0SBA information on size standards for businesses.",
+              "url": "www.sba.gov"
+            },
+            {
+              "name": "Securities &amp; Exchange Commission | EDGAR",
+              "tooltip": "Access documents filed by publicly traded companies",
+              "url": "www.sec.gov"
+            },
+            {
+              "name": "Skope Now",
+              "tooltip": "Fraud detection tool using social media analysis, people search, background checks, digital records, and reverse lookups. Allows for non-attribution web searching.",
+              "url": "www.skopenow.com"
+            },
+            {
+              "name": "Consolidated Screening List (CSL)",
+              "tooltip": "A list of parties for which the USG maintains restrictions on exports, reexports, or transfers of items",
+              "url": "www.trade.gov"
+            },
+            {
+              "name": "LLC vs Inc (Corporation) | Top 8 Best Differences (Infographics)",
+              "tooltip": "Informational article comparing LLCs and corporations.",
+              "url": "www.wallstreetmojo.com"
+            }
+          ]
         },
         {
-          "name": "ISO Claimsearch (National Insurance Crime Bureau)",
-          "tooltip": "Insurance fraud detection database",
-          "url": "https://claimsearch.iso.com/index.asp"
+          "name": "Military Tools",
+          "children": [
+            {
+              "name": "ARMS",
+              "tooltip": NaN,
+              "url": "armsweb.afpc.randolph.af.mil"
+            },
+            {
+              "name": "Algorithmic Warfare Analysis Research and Development - Intellipedia",
+              "tooltip": "\u00a0Information on algorithmic warfare analysis.",
+              "url": "intellipedia.intelink.gov"
+            },
+            {
+              "name": "Weapon System Impact Tool (WIST)",
+              "tooltip": "\u00a0Tool for assessing the impact of parts shortages on weapon systems.",
+              "url": "wsit.xsb.com"
+            }
+          ]
         },
         {
-          "name": "System for Award Management (SAM) Extract",
-          "tooltip": "Specialized request working with GSA OIG to get back-end data of SAM, receive names, bank account recs and more",
-          "url": "nan"
+          "name": "DAF Links",
+          "children": [
+            {
+              "name": "PEGA / Clarity",
+              "tooltip": "Air Force grant data repository",
+              "url": "bpms.ebs.afrl.af.mil"
+            },
+            {
+              "name": "Procurement Integrated Enterprise Environment (PIEE)",
+              "tooltip": "Primary enterprise procure-to-pay application for DoD. Contains multiple tools &amp; applications",
+              "url": "cac.piee.eb.mil"
+            },
+            {
+              "name": "DODAAC",
+              "tooltip": "Use to search Department of Defense Activity Address Code (DoDAAC)",
+              "url": "dodaac.cce.af.mil"
+            },
+            {
+              "name": "DoD Procurement Toolbox",
+              "tooltip": "A collection of tools &amp; resources to help you manage, enable, or share procurement information",
+              "url": "dodprocurementtoolbox.com"
+            },
+            {
+              "name": "Defense Personnel Records Information Retrieval System (DPRIS)",
+              "tooltip": "Provides access to military members&#39; service records",
+              "url": "dpris.dod.mil"
+            },
+            {
+              "name": "Employee Center Homepage - Employee Center",
+              "tooltip": "\u00a0The homepage for an employee center, likely providing resources and information for employees.",
+              "url": "eitaas.servicecenter.af.mil"
+            },
+            {
+              "name": "Contracting Business Intelligence System (CBIS)",
+              "tooltip": "Pulls reports from the Air Force contract writing systems",
+              "url": "lims-ev.cce.af.mil"
+            },
+            {
+              "name": "Supply Chain Management (SCM) View",
+              "tooltip": "Find out what AF and DoD program offices are responsible for an NSN, as well as what next higher assemblies and weapon systems an NSN goes into.",
+              "url": "lims-ev.cce.af.mil"
+            },
+            {
+              "name": "Project Management Resource Tools (PMRT)",
+              "tooltip": "To pull reports from Air Force contract writing systems (including CLIN level data)",
+              "url": "pmrt.cce.af.mil"
+            },
+            {
+              "name": "DCMA Contract Management Team (CMT)",
+              "tooltip": "DCMA tool - Provides the ability to view CMT for a CAGE or contract that is in one of DCMA sources",
+              "url": "pubmini.dcma.mil"
+            },
+            {
+              "name": "DoD Secure Access File Exchange (SAFE)",
+              "tooltip": "Secure file exchange for CUI/PII/PHI files and information",
+              "url": "safe.apps.mil"
+            },
+            {
+              "name": "SmartOSI",
+              "tooltip": "Checks for previous files or activities regarding your subject(s) in addition to I2MS",
+              "url": "tvyx-as-012v.area52.afnoapps.usaf.mil"
+            },
+            {
+              "name": "AFOSI SharePoint",
+              "tooltip": "\u00a0General SharePoint access.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "Welcome to DPC (Civilian Human Resources Management)",
+              "tooltip": "\u00a0Central hub for Air Force resources and collaboration.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "Enterprise Policy - ERP Share Point",
+              "tooltip": "\u00a0SharePoint site for enterprise policy.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "DAF365 HUB",
+              "tooltip": "\u00a0Air Force's digital workspace.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "OneDrive-USAF",
+              "tooltip": "\u00a0USAF's OneDrive access.",
+              "url": "usaf-my.dps.mil"
+            },
+            {
+              "name": "Contractor Responsibility Information System (CRIS)",
+              "tooltip": "Use to determine if SAF/GCR had a previous file or information on subject(s)",
+              "url": "www.cris.hq.af.mil"
+            },
+            {
+              "name": "Retired Military & Annuitants",
+              "tooltip": "\u00a0Information for retired military personnel and annuitants.",
+              "url": "www.dfas.mil"
+            },
+            {
+              "name": "Defense SBIR/STTR Innovation Portal (DSIP)",
+              "tooltip": "\u00a0Internal portal for the Defense SBIR/STTR program.",
+              "url": "www.dodsbirsttr.mil"
+            },
+            {
+              "name": "DAF E-Publishing",
+              "tooltip": "\u00a0Air Force E-Publishing Library.",
+              "url": "www.e-publishing.af.mil"
+            },
+            {
+              "name": "Joint Deficiency Reporting System (JDRS)",
+              "tooltip": "All Air Force product quality deficiency reports",
+              "url": "www.jdrs.mil"
+            },
+            {
+              "name": "SIBR",
+              "tooltip": "Contains information about all SBIR/STTR awards and grants",
+              "url": "www.sbir.gov"
+            },
+            {
+              "name": "Web of Science",
+              "tooltip": "Information about AF research, including SBIR and STTR awards/grants. Includes key about companies, PI, researchers, university affiliations, possible foreign affiliations, etc.",
+              "url": "www.webofknowledge.com"
+            }
+          ]
         },
         {
-          "name": "System for Award Management (SAM)",
-          "tooltip": "Determine if and when business was registered",
-          "url": "https://www.sam.gov/SAM/"
+          "name": "AF Grant Data",
+          "children": [
+            {
+              "name": "PEGA / Clarity",
+              "tooltip": "Air Force grant data repository",
+              "url": "bpms.ebs.afrl.af.mil"
+            }
+          ]
         },
         {
-          "name": "USA Spending",
-          "tooltip": "Spending data for USG, combines data from FPDS, SAM, FFATA Subaward",
-          "url": "https://www.usaspending.gov/"
+          "name": "Regulatory/Legal",
+          "children": [
+            {
+              "name": "BSA Portal (FinCen)",
+              "tooltip": "Search suspicious financial transactions &amp; locate financial assets | 314a Program, Egmont",
+              "url": "bsasearch.fincen.gov"
+            },
+            {
+              "name": "CFM International CFM56 | Military Wiki | Fandom",
+              "tooltip": "\u00a0Information on the CFM56 engine.",
+              "url": "military-history.fandom.com"
+            },
+            {
+              "name": "Public Access to Court Electronic Records (PACER)",
+              "tooltip": "Court records database, historical court proceedings associated with subject(s)",
+              "url": "pacer.uscourts.gov"
+            },
+            {
+              "name": "DoD Secure Access File Exchange (SAFE)",
+              "tooltip": "Secure file exchange for CUI/PII/PHI files and information",
+              "url": "safe.apps.mil"
+            },
+            {
+              "name": "System for Award Management (SAM)",
+              "tooltip": "To look up key contractor information to include certifications and debarments",
+              "url": "sam.gov"
+            },
+            {
+              "name": "Association of Certified Fraud Examiners",
+              "tooltip": "\u00a0Website for ACFE.",
+              "url": "www.acfe.com"
+            },
+            {
+              "name": "Acquisition.GOV",
+              "tooltip": "\u00a0Official website for US federal government acquisition regulations and policies.",
+              "url": "www.acquisition.gov"
+            },
+            {
+              "name": "5309.103 Policy | Acquisition.GOV",
+              "tooltip": "\u00a0Section about contractor responsibility.",
+              "url": "www.acquisition.gov"
+            },
+            {
+              "name": "Controlled Unclassified Information (CUI) | National Archives",
+              "tooltip": "\u00a0Information about CUI.",
+              "url": "www.archives.gov"
+            },
+            {
+              "name": "Law Enforcement Enterprise Portal (LEEP)",
+              "tooltip": "Multiple resources for LE and CI investigations include: Virtual Command Center (real-time information sharing on active shooter incidents, terrorist attacks, etc.); JusticeConnect (online forum with experts and colleagues); Active Shooter Resources SIG); N-DEx; National Gang Intelligence Center; eGuardian; and more.",
+              "url": "www.cjis.gov"
+            },
+            {
+              "name": "Federal Contractor Misconduct Database (FCMD)",
+              "tooltip": "Watchdog website that tracks contractor misconduct",
+              "url": "www.contractormisconduct.org"
+            },
+            {
+              "name": "Contractor Performance Assessment Reporting System (CPARS)",
+              "tooltip": "Formerly the Past Performance Information Reporting System (PPIRS). Records contain federal contractor criminal, civil, and administrative proceedings in connection with federal awards; suspensions and debarments; administrative agreements; non -responsibility determinations; terminations for cause or default; defective pricing determinations; termination for material failure to comply; subcontractor payment issues; information on trafficking in persons; and recipient not qualified determinations.",
+              "url": "www.cpars.gov"
+            },
+            {
+              "name": "CRIS - Contractor Responsibility Information System",
+              "tooltip": "\u00a0System for tracking contractor responsibility information.",
+              "url": "www.cris.hq.af.mil"
+            },
+            {
+              "name": "Defense Central Index of Investigations (DCII)",
+              "tooltip": "Use to determine if subject(s) have had previous investigations within DoD",
+              "url": "www.dcsa.mil"
+            },
+            {
+              "name": "Public_CAPCO_Register and Manual v5.1.pdf",
+              "tooltip": "\u00a0Document about CAPCO (Capital Company).",
+              "url": "www.dni.gov"
+            },
+            {
+              "name": "ICD 203 Analytic Standards.pdf",
+              "tooltip": "\u00a0Intelligence Community Directive 203 on analytic standards.",
+              "url": "www.dni.gov"
+            },
+            {
+              "name": "DoD CUI Program",
+              "tooltip": "\u00a0DoD's Controlled Unclassified Information program.",
+              "url": "www.dodcui.mil"
+            },
+            {
+              "name": "Department of Defense Office of Inspector General > Resources > Policies",
+              "tooltip": "\u00a0DoD OIG policies and resources.",
+              "url": "www.dodig.mil"
+            },
+            {
+              "name": "DoD Directives",
+              "tooltip": "\u00a0Official DoD Directives and Instructions.",
+              "url": "www.esd.whs.mil"
+            },
+            {
+              "name": "Electronic Subcontracting Reporting System (eSRS)",
+              "tooltip": "\u00a0System for reporting subcontracting activity.",
+              "url": "www.esrs.gov"
+            },
+            {
+              "name": "FAA Unapproved Parts Notifications (UPN) | Federal Aviation Administration",
+              "tooltip": "\u00a0Notifications about unapproved aircraft parts.",
+              "url": "www.faa.gov"
+            },
+            {
+              "name": "FAPIIS Production",
+              "tooltip": "\u00a0Federal Awardee Performance and Integrity Information System.",
+              "url": "www.fapiis.gov"
+            },
+            {
+              "name": "Federal Awardee Performance and Integrity Information System (FAPIIS)",
+              "tooltip": "Includes information from CPARs &amp; PPIRs - focuses more on adverse actions",
+              "url": "www.fapiis.gov"
+            },
+            {
+              "name": "GAO-21-309, DOD FRAUD RISK MANAGEMENT: Actions Needed to Enhance Department-Wide Approach, Focusing on Procurement Fraud Risks",
+              "tooltip": " Actions Needed to Enhance Department-Wide Approach, Focusing on Procurement Fraud Risks \u00a0A GAO (Government Accountability Office) report on DOD fraud risk management, focusing on procurement fraud risks.",
+              "url": "www.gao.gov"
+            },
+            {
+              "name": "Government Industry Data Exchange Program (GIDEP)",
+              "tooltip": "Technical information shared between companies and USGOV, as well as clearinghouse for counterfeit part alerts for USGOV.",
+              "url": "www.gidep.org"
+            },
+            {
+              "name": "PROCUREMENT FRAUD HANDBOOK",
+              "tooltip": "\u00a0Handbook on procurement fraud.",
+              "url": "www.gsaig.gov"
+            },
+            {
+              "name": "DoD Law Enforcement Defense Data Exchange (D D-Dex)",
+              "tooltip": "Criminal records information",
+              "url": "www.le-ddex.us"
+            },
+            {
+              "name": "Lexis Nexis",
+              "tooltip": "Provider of legal, government, business, and high-tech information sources",
+              "url": "www.lexisnexis.com"
+            },
+            {
+              "name": "Product Data Reporting and Evaluation Program (PDREP)",
+              "tooltip": "Product quality deficiency reports (PQDR) for all DoD (may not have all AF).  See JDRS for AF PQDRs.",
+              "url": "www.pdrep.csd.disa.mil"
+            },
+            {
+              "name": "Securities &amp; Exchange Commission | EDGAR",
+              "tooltip": "Access documents filed by publicly traded companies",
+              "url": "www.sec.gov"
+            },
+            {
+              "name": "Consolidated Screening List (CSL)",
+              "tooltip": "\u00a0US Government list of individuals and entities that are restricted from receiving exports.",
+              "url": "www.trade.gov"
+            },
+            {
+              "name": "Consolidated Screening List (CSL)",
+              "tooltip": "A list of parties for which the USG maintains restrictions on exports, reexports, or transfers of items",
+              "url": "www.trade.gov"
+            }
+          ]
         },
         {
-          "name": "Accurint",
-          "tooltip": "Compiles publicly available information on individuals and businesses",
-          "url": "https://secure.accurint.com/app/bps/main"
+          "name": "Data Aggregation/Analysis",
+          "children": [
+            {
+              "name": "Procurement Integrated Enterprise Environment (PIEE)",
+              "tooltip": "Pull Contracts, identify contracting officer, dates, research",
+              "url": "cac.piee.eb.mil"
+            },
+            {
+              "name": "exoINSIGHT",
+              "tooltip": "\u00a0Data analytics platform.",
+              "url": "ev3.exovera-projects.com"
+            },
+            {
+              "name": "Microsoft Forms",
+              "tooltip": "\u00a0Microsoft's survey and form creation tool.",
+              "url": "forms.osi.apps.mil"
+            },
+            {
+              "name": "API Data Analytics",
+              "tooltip": "\u00a0A website or platform offering API-based data analytics services.",
+              "url": "www.acq.osd.mil"
+            },
+            {
+              "name": "Federal Procurement Data Source (FPDS)",
+              "tooltip": "Government contract search - search by business",
+              "url": "www.fpds.gov"
+            },
+            {
+              "name": "System for Award Management (SAM)",
+              "tooltip": "Determine if and when business was registered",
+              "url": "www.sam.gov"
+            },
+            {
+              "name": "USA Spending",
+              "tooltip": "\u00a0Website providing open data on US government spending.",
+              "url": "www.usaspending.gov"
+            },
+            {
+              "name": "USA Spending",
+              "tooltip": "Spending data for USG, combines data from FPDS, SAM, FFATA Subaward",
+              "url": "www.usaspending.gov"
+            }
+          ]
         },
         {
-          "name": "Accurint - Virtual Crime Center (VCC)",
-          "tooltip": "Search people, vehicles, phones, bookings, virtual identities, &amp; businesses",
-          "url": "https://avcc.lexisnexisrisk.com/"
+          "name": "Person/Entity Search",
+          "children": [
+            {
+              "name": "DLA CAGE",
+              "tooltip": "Obtain key data like Company and Government Entity (CAGE) code and/or DUNS for subjects.",
+              "url": "cage.dla.mil mil"
+            },
+            {
+              "name": "ZETX",
+              "tooltip": "Phone lookup site",
+              "url": "phonelookup.zetx.com"
+            },
+            {
+              "name": "DoD Person Search",
+              "tooltip": "PII and dependent information for all DoD personnel.",
+              "url": "pki.dmdc.osd.mil"
+            },
+            {
+              "name": "LexisNexis Accurint",
+              "tooltip": "Compiles PII on an individual, as well as finds some company data. Is similar to TLO and CLEAR in terms of information contained in reports generated.",
+              "url": "secure.accurint.com"
+            },
+            {
+              "name": "SkopeNow",
+              "tooltip": "Fraud detection tool using social media analysis, people search, background checks, digital records, and reverse lookups. Allows for non-attribution web searching.",
+              "url": "www.skopenow.com"
+            }
+          ]
         },
         {
-          "name": "BSA Portal (FinCen)",
-          "tooltip": "Search suspicious financial transactions &amp; locate financial assets | 314a Program, Egmont",
-          "url": "https://bsasearch.fincen.gov/"
+          "name": "Forensic/Investigative Tools",
+          "children": [
+            {
+              "name": "Callyo",
+              "tooltip": "Records phone conversations and determin location of phone calls.",
+              "url": "callyo.com"
+            },
+            {
+              "name": "ISO Claimsearch (National Insurance Crime Bureau)",
+              "tooltip": "For FECA cases",
+              "url": "claimsearch.iso.com"
+            },
+            {
+              "name": "DataWalk Graph Analytics Platform Big Data Analysis Software",
+              "tooltip": "\u00a0Graph analytics platform.",
+              "url": "datawalk.com"
+            },
+            {
+              "name": "WCopyFind",
+              "tooltip": "Open source windows windows-based program that compares documents and reports similarities in their words and phrases. Useful for comparing SBIR/STTR proposals submitted/awarded across USGOV agencies.",
+              "url": "plagiarism.bloomfieldmedia.com"
+            },
+            {
+              "name": "Investigative Forensic Toolbar",
+              "tooltip": "\u00a0Toolbar for investigative and forensic work.",
+              "url": "search.org"
+            },
+            {
+              "name": "Fraud Red Flags and Indicators",
+              "tooltip": "\u00a0Information on fraud red flags.",
+              "url": "www.dodig.mil"
+            },
+            {
+              "name": "Forensic GIS | Office of Justice Programs",
+              "tooltip": "\u00a0A resource on using GIS in forensic investigations from the Office of Justice Programs.",
+              "url": "www.ojp.gov"
+            },
+            {
+              "name": "Intella",
+              "tooltip": "Can process, search, filter, and help understand connections from imported electronically stored information and digitized data from subjects.  Can also consolidate multiple related email chains.",
+              "url": "www.vound-software.com"
+            },
+            {
+              "name": "Adobe Bates Stamping",
+              "tooltip": "Bates numbering is standard way to place one or more identifying numbers, date and time marks on images and documents collected as evidence.  Adobe Acrobat DC has bates stamping functionality to quickly apply serialized markings.",
+              "url": "Unavailable"
+            },
+            {
+              "name": "One View Analyst (OVA)",
+              "tooltip": "Essentially a more basic capability than Intella Pro, which can process, search, filter, and help understand connections from imported electronically stored information and digitized data from subjects.",
+              "url": "Unavailable"
+            },
+            {
+              "name": "SnagIt",
+              "tooltip": "Video screen capture software.",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "Commercial &amp; Government Entity (CAGE)",
-          "tooltip": "To obtain key data like CAGE codes, UEI, and DUNS numbers for subjects &amp; companies",
-          "url": "https://cage.dla.mil"
+          "name": "Communication/Data Transfer",
+          "children": [
+            {
+              "name": "NIPRGPT Chat",
+              "tooltip": "\u00a0The NIPRGPT Chat website",
+              "url": "chat.niprgpt.mil"
+            },
+            {
+              "name": "NIPRGPT Chat",
+              "tooltip": "\u00a0The NIPRGPT Chat website",
+              "url": "chat.niprgpt.mil"
+            },
+            {
+              "name": "DoDIIS One-Way Transfer Service (DOTS)",
+              "tooltip": "Email to higher level networks from NIPR.",
+              "url": "dots.dodiis.mil"
+            },
+            {
+              "name": "GitHub",
+              "tooltip": "\u00a0A code hosting and collaboration platform for developers.",
+              "url": "github.com"
+            },
+            {
+              "name": "DoD SAFE",
+              "tooltip": "\u00a0DoD's Secure Access File Exchange for secure file sharing.",
+              "url": "safe.apps.mil"
+            },
+            {
+              "name": "The DAF365 Hub - Home",
+              "tooltip": "0",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "Authentic8 (i)",
+              "tooltip": "Managed attribution tool to mask online presence, specifically that an IP address is coming from an AF, DoD, or USGOV server.",
+              "url": "www.a8silo.com"
+            },
+            {
+              "name": "Intelink",
+              "tooltip": "\u00a0A secure online collaboration platform used within the U.S. Intelligence Community.",
+              "url": "www.intelink.gov"
+            },
+            {
+              "name": "Intelink",
+              "tooltip": "\u00a0A secure online collaboration platform used within the U.S. Intelligence Community.",
+              "url": "www.intelink.gov"
+            }
+          ]
         },
         {
-          "name": "Core Logic / RealQuest",
-          "tooltip": "Residential property database &amp; real estate assets linked to subject(s)",
-          "url": "https://pro.realquest.com/"
+          "name": "Uncategorized",
+          "children": [
+            {
+              "name": "Best HTML Viewer, HTML Beautifier, HTML Formatter and to Test / Preview HTML Output",
+              "tooltip": "\u00a0Online tool for viewing and formatting HTML code.",
+              "url": "codebeautify.org"
+            },
+            {
+              "name": "2theEast/ReferenceLibrary",
+              "tooltip": "\u00a0A GitHub repository named \"ReferenceLibrary\" by the user \"2theEast,\" likely containing GIS-related resources.",
+              "url": "github.com"
+            },
+            {
+              "name": "DPS",
+              "tooltip": "PII and dependent information for all DoD personnel.",
+              "url": "pki.dmdc.osd.mil"
+            },
+            {
+              "name": "HowTo--Endnotes-InsertingEndnotesAndRemovingEndnotesSeparatorLine.pdf",
+              "tooltip": "\u00a0Instructions for using endnotes in a document.",
+              "url": "safe.menlosecurity.com"
+            },
+            {
+              "name": "Power Point portrait_landscape",
+              "tooltip": "\u00a0PowerPoint template or document.",
+              "url": "support.microsoft.com"
+            },
+            {
+              "name": "AFOSI SharePoint",
+              "tooltip": NaN,
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "Command Editor Tips - All Documents",
+              "tooltip": "\u00a0Tips for using a command editor (likely specific to a system).",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "WebMail",
+              "tooltip": "\u00a0Email access.",
+              "url": "webmail.apps.mil"
+            },
+            {
+              "name": "Fake spare parts were supplied to fix top-selling jet engines",
+              "tooltip": "\u00a0News article about fake jet engine parts.",
+              "url": "www.detroitnews.com"
+            },
+            {
+              "name": "www.inknowvation.com",
+              "tooltip": "\u00a0Unknown website.",
+              "url": "www.inknowvation.com"
+            },
+            {
+              "name": "Home - In-Q-Tel",
+              "tooltip": "\u00a0Venture capital firm that invests in technology for the intelligence community.",
+              "url": "www.iqt.org"
+            },
+            {
+              "name": "Misk.com",
+              "tooltip": "\u00a0Unknown website.",
+              "url": "www.misk.com"
+            },
+            {
+              "name": "Laboratory Information Management System - Environment, Safety, and Occupational Health (LIMS-EV) (i)",
+              "tooltip": "\u00a0A website for requesting access to LIMS-EV (Laboratory Information Management System - Environment, Safety, and Occupational Health).",
+              "url": "www.my.af.mil"
+            },
+            {
+              "name": "Microsoft Office Home",
+              "tooltip": "\u00a0Microsoft Office home page.",
+              "url": "www.ohome.apps.mil"
+            },
+            {
+              "name": "The United States Governement Manual",
+              "tooltip": "The United States Government Manual has been the \"official handbook\" of the Federal Government.",
+              "url": "www.usgovernmentmanual.gov"
+            },
+            {
+              "name": "National strategy for ADVANCED MANUFACTURING",
+              "tooltip": "\u00a0National strategy document on advanced manufacturing.",
+              "url": "www.whitehouse.gov"
+            },
+            {
+              "name": "DPS",
+              "tooltip": NaN,
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "Consolidated Screening List (CSL)",
-          "tooltip": "A list of parties for which the USG maintains restrictions on exports, reexports, or transfers of items",
-          "url": "https://www.trade.gov/consolidated-screening-list"
+          "name": "Geography/Installation",
+          "children": [
+            {
+              "name": "DODAAC",
+              "tooltip": "Use to search Department of Defense Activity Address Code (DoDAAC)",
+              "url": "dodaac.cce.af.mil"
+            },
+            {
+              "name": "IC GIS Portal - Intellipedia",
+              "tooltip": "\u00a0A GIS portal on Intellipedia, a collaborative intelligence encyclopedia.",
+              "url": "intellipedia.intelink.gov"
+            },
+            {
+              "name": "OSI Footprint",
+              "tooltip": "\u00a0Information about Air Force Office of Special Investigations locations.",
+              "url": "portal.geo.nga.mil"
+            },
+            {
+              "name": "NWS Radar",
+              "tooltip": "\u00a0National Weather Service radar.",
+              "url": "radar.weather.gov"
+            },
+            {
+              "name": "Southern Maryland Weather",
+              "tooltip": "\u00a0Weather information for Southern Maryland.",
+              "url": "somdweather.com"
+            },
+            {
+              "name": "National and Local Weather Radar, Daily Forecast, Hurricane and information from The Weather Channel and weather.com",
+              "tooltip": "\u00a0Weather information from The Weather Channel.",
+              "url": "weather.com"
+            },
+            {
+              "name": "Location Analytics Software | ArcGIS Insights",
+              "tooltip": "\u00a0ArcGIS Insights for location analytics.",
+              "url": "www.esri.com"
+            },
+            {
+              "name": "Glynco Campus Life | Federal Law Enforcement Training Centers",
+              "tooltip": "\u00a0Information about campus life at the Federal Law Enforcement Training Centers (FLETC) in Glynco, GA.",
+              "url": "www.fletc.gov"
+            }
+          ]
         },
         {
-          "name": "Contractor Performance Assessment Reporting System (CPARS)",
-          "tooltip": "Records contain federal contractor criminal, civil, and administrative proceedings",
-          "url": "https://www.cpars.gov"
+          "name": "Travel/Movement",
+          "children": [
+            {
+              "name": "Defense Travel System",
+              "tooltip": "\u00a0System for managing official DoD travel.",
+              "url": "dtsproweb.defensetravel.osd.mil"
+            },
+            {
+              "name": "Defense Travel System (DTS)",
+              "tooltip": "Search on subject's leave and travel",
+              "url": "dtsproweb.defensetravel.osd.mil"
+            },
+            {
+              "name": "Rt. 11 W. Alt Transportation.pdf",
+              "tooltip": "\u00a0Likely a local transportation document (needs further context).",
+              "url": "my.whs.mil"
+            },
+            {
+              "name": "Defense Travel Management Office (DTMO)",
+              "tooltip": "\u00a0Information and resources for official DoD travel.",
+              "url": "secure.defensetravel.dod.mil"
+            },
+            {
+              "name": "ARC",
+              "tooltip": "Travel bookings search tool",
+              "url": "tip.arc.travel"
+            },
+            {
+              "name": "Treasury Enforcement Communication System (TECS)",
+              "tooltip": "Owned by CBP, travel history, lookouts, derog info on subject or business (I)",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "Contractor Responsibility Information System (CRIS)",
-          "tooltip": "Use to determine if SAF/GCR had a previous file or information on subject(s)",
-          "url": "https://www.cris.hq.af.mil"
+          "name": "Product/Services",
+          "children": [
+            {
+              "name": "Haystack",
+              "tooltip": "Provides part information from 50+ supply part/supply databases in DoD and U.S. Government. Mines Federal Logistics Information System (FLIS) and National and NATO Stock Numbers (NSNs) databases of current and obsolete parts, alternates, and suppliers for military equipment, including current pricing and availability.",
+              "url": "login.ihserc.com"
+            },
+            {
+              "name": "WCopyFind",
+              "tooltip": "Open source program that compares documents and reports similarities in words/phrases",
+              "url": "plagiarism.bloomfieldmedia.com"
+            },
+            {
+              "name": "Whois Lookup",
+              "tooltip": "Research domain name or IP address ownership",
+              "url": "research.domaintools.com"
+            },
+            {
+              "name": "DoD Secure Access File Exchange (SAFE)",
+              "tooltip": "Secure file exchange for CUI/PII/PHI files and information",
+              "url": "safe.apps.mil"
+            },
+            {
+              "name": "Investigative Forensic Toolbar",
+              "tooltip": "Tools for searching Cell, IP, Wi-Fi, P2P, Legal, Social Networking and other resources",
+              "url": "search.org"
+            },
+            {
+              "name": "ILS SmartParts",
+              "tooltip": "Parts database - largest world-wide aerospace marketplace &amp; intelligence platform",
+              "url": "static.ilsmart.com"
+            },
+            {
+              "name": "Weapon System Impact Tool (WIST)",
+              "tooltip": "To find out what weapons systems a NSN belongs to across the DoD",
+              "url": "wsit.xsb.com"
+            },
+            {
+              "name": "Product and Service Code Manual | Acquisition.GOV",
+              "tooltip": "\u00a0Manual for classifying products and services used by the government.",
+              "url": "www.acquisition.gov"
+            },
+            {
+              "name": "Authentic8 (i)",
+              "tooltip": "Managed attribution tool",
+              "url": "www.asilo.com"
+            },
+            {
+              "name": "North American Industry Classification System (NAICS) U.S. Census Bureau",
+              "tooltip": "\u00a0Official NAICS code information.",
+              "url": "www.census.gov"
+            },
+            {
+              "name": "Government Industry Data Exchange Program (GIDEP)",
+              "tooltip": "Technical information shared between companies and USGOV, as well as clearinghouse for counterfeit part alerts for USGOV.",
+              "url": "www.gidep.org"
+            },
+            {
+              "name": "International Bank Account Number Validation (IBAN) Checker",
+              "tooltip": "Check &amp; validate International Bank Account Numbers for errors",
+              "url": "www.iban.com"
+            },
+            {
+              "name": "Joint Deficiency Reporting System (JDRS)",
+              "tooltip": "All Air Force product quality deficiency reports",
+              "url": "www.jdrs.mil"
+            },
+            {
+              "name": "Lexis Nexis",
+              "tooltip": "Provider of legal, government, business, and high-tech information sources",
+              "url": "www.lexisnexis.com"
+            },
+            {
+              "name": "Part Target",
+              "tooltip": "Global marketplace for NSN parts, military components, &amp; aircraft/electro-mechanical parts",
+              "url": "www.parttarget.com"
+            },
+            {
+              "name": "WB Parts",
+              "tooltip": "Commercial & Military Aircraft Parts Supplier - NSN Database",
+              "url": "www.wbparts.com"
+            },
+            {
+              "name": "Comprehensive Financial Investigative Solution (CFIS)",
+              "tooltip": "Automated software to import/analyze financial data and invoice information",
+              "url": "Unavailable"
+            },
+            {
+              "name": "Intella",
+              "tooltip": "Enables the processing, searching, filtering imported electronically stored information on subject(s)",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "DataViser",
-          "tooltip": "Pulls data from D&amp;B, USASpending, SAM and other authoritative databases",
-          "url": "https://afosi.datavisre.net/login"
+          "name": "Real Estate",
+          "children": [
+            {
+              "name": "RealQuest Professional",
+              "tooltip": "\u00a0Real estate data and analytics platform.",
+              "url": "pro.realquest.com"
+            },
+            {
+              "name": "NETR Online \u2022 Public Records, Search Records, Property Tax, Property Search, Assessor",
+              "tooltip": "\u00a0Public records search engine.",
+              "url": "publicrecords.netronline.com"
+            },
+            {
+              "name": "Core Logic / RealQuest",
+              "tooltip": "\u00a0Provider of property information and analytics.",
+              "url": "www.corelogic.com"
+            }
+          ]
         },
         {
           "name": "DCMA Contract Management Team (CMT)",
-          "tooltip": "DCMA tool - Provides the ability to view CMT for a CAGE or contract that is in one of DCMA sources",
-          "url": "https://pubmini.dcma.mil/"
+          "children": [
+            {
+              "name": "DCMA Contract Management Team (CMT)",
+              "tooltip": "DCMA tool - Provides the ability to view CMT for a CAGE or contract that is in one of DCMA sources",
+              "url": "pubmini.dcma.mil"
+            },
+            {
+              "name": "DCMA Contract Management Team (CMT)",
+              "tooltip": "DCMA tool - Provides the ability to view CMT for a CAGE or contract that is in one of DCMA sources",
+              "url": "www.dcma.mil"
+            }
+          ]
         },
         {
-          "name": "DODAAC",
-          "tooltip": "Use to search Department of Defense Activity Address Code (DoDAAC)",
-          "url": "https://dodaac.cce.af.mil/DODAAC.aspx"
+          "name": "OSI Internal Tools",
+          "children": [
+            {
+              "name": "SmartOSI",
+              "tooltip": "Run stats on case openings, closings, recoveries, seizures, etc",
+              "url": "tvyx-as-008v.area52.afnoapps.usaf.mil"
+            },
+            {
+              "name": "SmartOSI",
+              "tooltip": "\u00a0Likely a SharePoint site related to a specific initiative within AFOSI.",
+              "url": "tvyx-as-012v.area52.afnoapps.usaf.mil"
+            },
+            {
+              "name": "AFOSI SharePoint",
+              "tooltip": "\u00a0AFOSI's main SharePoint portal.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "OSI - IT Portal",
+              "tooltip": "\u00a0Air Force Office of Special Investigations IT support portal.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "PF-Share Point_Invest Tools",
+              "tooltip": "\u00a0SharePoint site with tools for procurement fraud investigations.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "AFOSI A&P",
+              "tooltip": "\u00a0AFOSI's Audit and Prevention resources (likely on SharePoint).",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "PF Shared Drive",
+              "tooltip": "\u00a0Shared drive for Procurement Fraud investigations.",
+              "url": "usaf.dps.mil"
+            },
+            {
+              "name": "AFOSI SharePoint",
+              "tooltip": "\u00a0AFOSI sharepoint.",
+              "url": "www.osi.af.mil"
+            },
+            {
+              "name": "Ci2MS",
+              "tooltip": "OSI Classified Case Management System",
+              "url": "Unavailable"
+            }
+          ]
         },
         {
-          "name": "Electronic Subcontracting Reporting System (eSRS)",
-          "tooltip": "Contains information related to subcontractors",
-          "url": "https://www.esrs.gov"
-        },
-        {
-          "name": "Fed Awardee Performance Integrity Information System (FAPIIIS)",
-          "tooltip": "Includes information from CPARs &amp; PPIRs - focuses more on adverse actions",
-          "url": "https://www.fapiis.gov/fapiis/index.action"
-        },
-        {
-          "name": "Federal Contractor Misconduct Database (FCMD)",
-          "tooltip": "Watchdog website that tracks contractor misconduct",
-          "url": "https://www.contractormisconduct.org"
-        },
-        {
-          "name": "Glassdoor",
-          "tooltip": "US website where current and former employees can review companies",
-          "url": "https://www.glassdoor.com/"
-        },
-        {
-          "name": "IBAN Checker",
-          "tooltip": "Check &amp; validate International Bank Account Numbers for errors",
-          "url": "https://www.iban.com/iban-checker"
-        },
-        {
-          "name": "Lexis Nexis",
-          "tooltip": "Provider of legal, government, business, and high-tech information sources",
-          "url": "https://www.lexisnexis.com/"
-        },
-        {
-          "name": "Pitchbook",
-          "tooltip": "Tracks public &amp; private equity markets including venture capital &amp; private equity",
-          "url": "https://pitchbook.com/"
-        },
-        {
-          "name": "Public Access to Court Electronic Records (PACER)",
-          "tooltip": "Court records database, historical court proceedings associated with subject(s)",
-          "url": "https://pacer.uscourts.gov"
-        },
-        {
-          "name": "Public Records Online Directory | NETRONLINE",
-          "tooltip": "Public records including deeds, mortgages, assessment data, tax details, &amp; parcel maps",
-          "url": "https://publicrecords.netronline.com/usir/UsirApp/index.jsp"
-        },
-        {
-          "name": "Securities &amp; Exchange Commission | EDGAR",
-          "tooltip": "Access documents filed by publicly traded companies",
-          "url": "https://www.sec.gov/search-filings"
-        },
-        {
-          "name": "Skope Now",
-          "tooltip": "Social media searches of subjects and companies",
-          "url": "https://www.skopenow.com/login"
-        },
-        {
-          "name": "Supply Chain Management (SCM) View",
-          "tooltip": "Find out what DAF/DoD program offices are responsible for a NSN",
-          "url": "https://lims-ev.cce.af.mil/scmview/Main.html"
-        },
-        {
-          "name": "System for Award Management (SAM)",
-          "tooltip": "To look up key contractor information to include certifications and debarments",
-          "url": "https://sam.gov/SAM"
-        },
-        {
-          "name": "Whois Lookup",
-          "tooltip": "Research domain name or IP address ownership",
-          "url": "https://research.domaintools.com/"
-        },
-        {
-          "name": "Transaction Record Analysis Center",
-          "tooltip": "Its primary purpose is to monitor and analyze cross-border money transfers, particularly those sent from the U.S. to over 20 countries.",
-          "url": "https://www.swbtrac.com/login/login.php"
+          "name": "Relationship",
+          "children": [
+            {
+              "name": "SmartOSI",
+              "tooltip": "Checks for previous files or activities regarding your subject(s) in addition to I2MS",
+              "url": "tvyx-as-012v.area52.afnoapps.usaf.mil"
+            },
+            {
+              "name": "Contractor Responsibility Information System (CRIS)",
+              "tooltip": "Use to determine if SAF/GCR had a previous file or information on subject(s)",
+              "url": "www.cris.hq.af.mil"
+            },
+            {
+              "name": "Defense Central Index of Investigations (DCII)",
+              "tooltip": "Use to determine if subject(s) have had previous investigations within DoD",
+              "url": "www.dcsa.mil"
+            },
+            {
+              "name": "Electronic Subcontracting Reporting System (eSRS)",
+              "tooltip": "Contains information related to subcontractors",
+              "url": "www.esrs.gov"
+            },
+            {
+              "name": "Glassdoor",
+              "tooltip": "Open source information regarding reviews of companies by current and former employees.",
+              "url": "www.glassdoor.com"
+            }
+          ]
         }
       ]
     },
     {
-      "name": "Person",
+      "name": "RECORDS CHECK",
       "children": [
         {
-          "name": "LexisNexis Accurint",
-          "tooltip": "Compiles PII on an individual, as well as finds some company data. Is similar to TLO and CLEAR in terms of information contained in reports generated.",
-          "url": "https://secure.accurint.com/app/bps/main/"
-        },
-        {
-          "name": "DLA CAGE",
-          "tooltip": "Obtain key data like Company and Government Entity (CAGE) code and/or DUNS for subjects.",
-          "url": "https://cage.dla.mil mil/"
-        },
-        {
-          "name": "Skopenow",
-          "tooltip": "Social media searches of subjects and companies, as well as perpetual collection of social media metadata.",
-          "url": "https://www.skopenow.com/login"
-        },
-        {
-          "name": "Accurint/Lexis Nexis",
-          "tooltip": "Commercial database to run names, businesses",
-          "url": "https://secure.accurint.com/app/bps/main"
-        },
-        {
-          "name": "SkopeNow",
-          "tooltip": "Fraud detection tool using social media analysis, people search, background checks, digital records, and reverse lookups. Allows for non-attribution web searching.",
-          "url": "https://www.skopenow.com/login"
-        },
-        {
-          "name": "ZETX",
-          "tooltip": "Phone lookup site",
-          "url": "https://phonelookup.zetx.com/"
-        },
-        {
-          "name": "Accurint",
-          "tooltip": "Compiles publicly available information on individuals and businesses",
-          "url": "https://secure.accurint.com/app/bps/main"
-        },
-        {
-          "name": "Accurint - Virtual Crime Center (VCC)",
-          "tooltip": "Search people, vehicles, phones, bookings, virtual identities, &amp; businesses",
-          "url": "https://avcc.lexisnexisrisk.com/"
-        },
-        {
-          "name": "Consular Consolidated Database (CCD)",
-          "tooltip": "Provided by the Department of State. Contains Passport and POE passenger information",
-          "url": "Limited access provided to OSI, available thru ICON"
-        },
-        {
-          "name": "D-Dex / NCIC",
-          "tooltip": "Criminal records information",
-          "url": "https://www.le-ddex.us/ddex/login.jsp"
-        },
-        {
-          "name": "Defense Central Index of Investigations (DCII)",
-          "tooltip": "Use to determine if subject(s) have had previous investigations within DoD",
-          "url": "https://www.dcsa.mil/is/dcii"
-        },
-        {
-          "name": "Defense Personnel Records Information Retrieval System (DPRIS)",
-          "tooltip": "Provides access to military members&#39; service records",
-          "url": "https://dpris.dod.mil"
-        },
-        {
-          "name": "Enhanced Law Enforcement Plaform - ELEP/IVR",
-          "tooltip": "Determine all phone carriers historically linked to a number",
-          "url": "https://lawenforcement.numberportability.com"
-        },
-        {
-          "name": "Investigative &amp; Forensic Toolbar",
-          "tooltip": "Tools for searching Cell, IP, Wi-Fi, P2P, Legal, Social Networking and other resources",
-          "url": "https://search.org/toolbar/"
-        },
-        {
-          "name": "Public Access to Court Electronic Records (PACER)",
-          "tooltip": "Court records database, historical court proceedings associated with subject(s)",
-          "url": "https://pacer.uscourts.gov"
-        },
-        {
-          "name": "Skope Now",
-          "tooltip": "Social media searches of subjects and companies",
-          "url": "https://www.skopenow.com/login"
-        },
-        {
-          "name": "TECS",
-          "tooltip": "CBP passenger data for border crossings",
-          "url": "Currently unavailable - pending access request"
-        }
-      ]
-    },
-    {
-      "name": "Data Type",
-      "children": [
-        {
-          "name": "SBIR.gov",
-          "tooltip": "Information related to all USGOV SBIR and STTR awards.  Includes key information about companies, principal investigators (PI), researchers, university affiliations, and more.",
-          "url": "https://www.sbir.gov"
-        },
-        {
-          "name": "Authentic8",
-          "tooltip": "Managed attribution tool to mask online presence, specifically that an IP address is coming from an AF, DoD, or USGOV server.",
-          "url": "https://www.a8silo.com/"
-        },
-        {
-          "name": "DataViser",
-          "tooltip": "An AF-built web-based, intuitive tool that pulls from various financial and contracting databases (primarily D&B Worldbase, USASpending, and SAM) and allows a user to quickly create their own link analyses.",
-          "url": "https:// afosi.dataviser.net/login"
-        },
-        {
-          "name": "Bloomberg Terminal",
-          "tooltip": "This a subscription service that provides the law enforcement and intelligence community with accurate, timely data, and sophisticated tools to find vast amounts of corporate data and supply chain information of publicly traded companies worldwide.",
-          "url": "https://www.bloomberg.com/professional/solution/bloomberg-terminal/"
-        },
-        {
-          "name": "Comprehensive Financial Investigative Solution (CFIS)",
-          "tooltip": "Automated software to import/analyze financial data and invoices.",
-          "url": "https://aitcfis.com/cfis/"
-        },
-        {
-          "name": "DoDIIS One-Way Transfer Service (DOTS)",
-          "tooltip": "Email to higher level networks from NIPR.",
-          "url": "https://dots.dodiis.mil"
-        },
-        {
-          "name": "Contracting Opportunities",
-          "tooltip": "Formerly Federal Business Opportunities (FedBizOpps or FBO); open source USGOV soliciation and contract award system.",
-          "url": "https://sam.gov/content/opportunities"
-        },
-        {
-          "name": "Glass Door",
-          "tooltip": "Open source information regarding reviews of companies by current and former employees.",
-          "url": "https://www.glassdoor.com/index.htm"
-        },
-        {
-          "name": "SmartOSI",
-          "tooltip": "Reports and checks of CACTIS, Legacy I2MS and WI2MS for previous files or activities regarding subjects and investigative trend data.",
-          "url": "https://tvyx-as-008v.area52.afnoapps.usaf.mil/ibmcognos/bi/"
-        },
-        {
-          "name": "Recorded Future",
-          "tooltip": "Keyword searches for information on the dark web.  NOTE: PF is currently running perpetual searches of keywords in this system.",
-          "url": "https://www.recordedfuture.com/"
-        },
-        {
-          "name": "PitchBook",
-          "tooltip": "Tracks public and private equity markets, including venture capital, private equity, and M&A.",
-          "url": "https://pitchbook.com/"
-        },
-        {
-          "name": "Web of Science",
-          "tooltip": "Information about AF research, including SBIR and STTR awards/grants. Includes key about companies, PI, researchers, university affiliations, possible foreign affiliations, etc.",
-          "url": "https://www.webofknowledge.com/"
-        },
-        {
-          "name": "Authentic8",
-          "tooltip": "Open source searching with masked IP",
-          "url": "https://a8silo.com/"
-        },
-        {
-          "name": "DataViser",
-          "tooltip": "Applies network analysis across complex relationships to identify targets of interest via customized searching, link chart visualization, and collaboration. Provides real-time link analysis between individuals/companies using SAM, FPDS, and USASpending data.",
-          "url": "https://afosi.dataviser.net/login"
-        },
-        {
-          "name": "Federal Procurement Data Source (FPDS)",
-          "tooltip": "Government contract search - search by business",
-          "url": "https://www.fpds.gov/fpdsng_cms/index.php/en/"
-        },
-        {
-          "name": "Pega (Clarity)",
-          "tooltip": "AF Grant data",
-          "url": "https://bpms.ebs.afrl.af.mil/prweb/PRWebLDAP1/SUPg5e3slt_dydffoDByB2pTkNWLuPKc*/!STANDARD?pyActivity=Data-Portal.ShowDesktop"
-        },
-        {
-          "name": "Procurement Integrated Enterprise Environment (PIEE)",
-          "tooltip": "Pull Contracts, identify contracting officer, dates, research",
-          "url": "https://cac.piee.eb.mil/xhtml/unauth/home/login.xhtml?logout=Y"
-        },
-        {
-          "name": "Product Data Reporting and Evaluation Program (PDREP)",
-          "tooltip": "Pull contractor profiles, identify deficiency reports/delays on contract by business",
-          "url": "https://www.pdrep.csd.disa.mil/#"
-        },
-        {
-          "name": "SkopeNow",
-          "tooltip": "Fraud detection tool using social media analysis, people search, background checks, digital records, and reverse lookups. Allows for non-attribution web searching.",
-          "url": "https://www.skopenow.com/login"
-        },
-        {
-          "name": "System for Award Management (SAM)",
-          "tooltip": "Determine if and when business was registered",
-          "url": "https://www.sam.gov/SAM/"
-        },
-        {
-          "name": "USA Spending",
-          "tooltip": "Spending data for USG, combines data from FPDS, SAM, FFATA Subaward",
-          "url": "https://www.usaspending.gov/"
-        }
-      ]
-    },
-    {
-      "name": "Investigative Use Case",
-      "children": [
-        {
-          "name": "Adobe Bates Stamping",
-          "tooltip": "Bates numbering is standard way to place one or more identifying numbers, date and time marks on images and documents collected as evidence.  Adobe Acrobat DC has bates stamping functionality to quickly apply serialized markings.",
-          "url": "nan"
-        },
-        {
-          "name": "Callyo",
-          "tooltip": "Records phone conversations and determin location of phone calls.",
-          "url": "https://callyo.com/"
-        },
-        {
-          "name": "Intella",
-          "tooltip": "Can process, search, filter, and help understand connections from imported electronically stored information and digitized data from subjects.  Can also consolidate multiple related email chains.",
-          "url": "https://www.vound-software.com/pro"
-        },
-        {
-          "name": "ISO",
-          "tooltip": "For FECA cases",
-          "url": "https://claimsearch.iso.com/"
-        },
-        {
-          "name": "One View Analyst (OVA)",
-          "tooltip": "Essentially a more basic capability than Intella Pro, which can process, search, filter, and help understand connections from imported electronically stored information and digitized data from subjects.",
-          "url": "nan"
-        },
-        {
-          "name": "SnagIt",
-          "tooltip": "Video screen capture software.",
-          "url": "nan"
-        },
-        {
-          "name": "WCopyFind",
-          "tooltip": "Open source windows windows-based program that compares documents and reports similarities in their words and phrases. Useful for comparing SBIR/STTR proposals submitted/awarded across USGOV agencies.",
-          "url": "https://plagiarism.bloomfieldmedia.com/software/wcopyfind/"
-        },
-        {
-          "name": "i2MS",
-          "tooltip": "OSI Case Management System",
-          "url": "https://webi2ms.us.af.mil/pls/apex/f?p=100:1000:5167300463224:::::"
-        },
-        {
-          "name": "Ci2MS",
-          "tooltip": "OSI Classified Case Management System",
-          "url": "nan"
-        },
-        {
-          "name": "Smart OSI",
-          "tooltip": "Run stats on case openings, closings, recoveries, seizures, etc",
-          "url": "https://tvyx-as-008v.area52.afnoapps.usaf.mil/ibmcognos/bi/?perspective=home"
-        },
-        {
-          "name": "DoD Procurement Toolbox",
-          "tooltip": "A collection of tools &amp; resources to help you manage, enable, or share procurement information",
-          "url": "https://dodprocurementtoolbox.com"
-        },
-        {
-          "name": "Web of Science",
-          "tooltip": "Information about DAF research, including SBIR &amp; STTR awards &amp; grants",
-          "url": "https://www.webofknowledge.com"
-        }
-      ]
-    },
-    {
-      "name": "Geography / Installation",
-      "children": [
-        {
-          "name": "Automated Records Management System (ARMS)",
-          "tooltip": "Obtain documents from an Air Force member's personnel information file.",
-          "url": "https://www.my.af.mil/faf/FAF/fafHome.jsp"
-        },
-        {
-          "name": "Automated Targeting System",
-          "tooltip": "Obtain all overseas shipment records to/from a subject individual or company; potentially critical information for product substitution cases.",
-          "url": "nan"
-        },
-        {
-          "name": "Consular Consolidated Database (CCD)",
-          "tooltip": "Consular Consolidated Database (CCD) is one of the largest Oracle based data warehouses in the world that holds current and archived data from the Consular Affairs (CA) domestic and post databases around the world. As of December 2009, it contains over 100 million visa cases and 75 million photographs, utilizing billions of rows of data, and has a current growth rate of approximately 35 thousand visa cases every day. It was created to provide CA a near real-time aggregate of the consular transaction activity collected domestically and at post databases around the world. The CCD is the IT  implementation that provides for a set of centralized visa and American citizen services supporting consular posts and back office functions.  Utilization of these records would assist field agents with obtaining foreign nationals visa applications and photographs for historical analysis.  In addition, field agents would have access to U.S. Citizens (USC) passport applications and photographs.",
-          "url": "None available"
-        },
-        {
-          "name": "Defense Central Index of Investigations (DCII)",
-          "tooltip": "Determine if subject(s) have had previous investigations on them in the past in the DoD.",
-          "url": "https://www.dcsa.mil/is/dcii/"
-        },
-        {
-          "name": "Defense Personnel Records Information Retrieval System (DPRIS)",
-          "tooltip": "Access to military member's service records across all of DoD; supplements ARMS.",
-          "url": "https://dpris.dod.mil"
-        },
-        {
-          "name": "DoD Person Search (DPS)",
-          "tooltip": "PII and dependent information for all DoD personnel.",
-          "url": "https://pki.dmdc.osd.mil/appj/dps/index.html"
-        },
-        {
-          "name": "Joint Personnel Adjudication System (JPAS)",
-          "tooltip": "Clearance data for all DoD personnel.",
-          "url": "https://www.dcsa.mil/is/jpas/"
-        },
-        {
-          "name": "TECS",
-          "tooltip": "All CBP passenger data for border crossings.",
-          "url": "Pending"
-        },
-        {
-          "name": "USXPORTS",
-          "tooltip": "All ITAR and dual-use export license application information from State Department, Department of Commerce, and Treasury Department.",
-          "url": "SIPR"
-        },
-        {
-          "name": "Seized Assets and Case Tracking System (SEACATS)",
-          "tooltip": "All CBP import and export seizure data for shipments to and from the U.S.",
-          "url": "Pending"
-        },
-        {
-          "name": "ARMS",
-          "tooltip": "nan",
-          "url": "https://armsweb.afpc.randolph.af.mil/ArmsWeb/Default.aspx"
-        },
-        {
-          "name": "DPRIS",
-          "tooltip": "Military Recs",
-          "url": "https://www.dpris.dod.mil/"
-        },
-        {
-          "name": "Contracting Business Intelligence System (CBIS)",
-          "tooltip": "Pulls reports from the Air Force contract writing systems",
-          "url": "https://lims-ev.cce.af.mil/"
-        },
-        {
-          "name": "Contractor Responsibility Information System (CRIS)",
-          "tooltip": "Use to determine if SAF/GCR had a previous file or information on subject(s)",
-          "url": "https://www.cris.hq.af.mil"
-        },
-        {
-          "name": "DCMA Contract Management Team (CMT)",
-          "tooltip": "DCMA tool - Provides the ability to view CMT for a CAGE or contract that is in one of DCMA sources",
-          "url": "https://pubmini.dcma.mil/"
-        },
-        {
-          "name": "Defense Personnel Records Information Retrieval System (DPRIS)",
-          "tooltip": "Provides access to military members&#39; service records",
-          "url": "https://dpris.dod.mil"
-        },
-        {
-          "name": "Defense SBIR/STTR Innovation Portal (DSIP)",
-          "tooltip": "SBIR/STTR Innovation Portal",
-          "url": "https://www.dodsbirsttr.mil/ehb-app/home"
-        },
-        {
-          "name": "DODAAC",
-          "tooltip": "Use to search Department of Defense Activity Address Code (DoDAAC)",
-          "url": "https://dodaac.cce.af.mil/DODAAC.aspx"
-        },
-        {
-          "name": "DODAAC",
-          "tooltip": "Use to search Department of Defense Activity Address Code (DoDAAC)",
-          "url": "https://dodaac.cce.af.mil/DODAAC.aspx"
-        },
-        {
-          "name": "DoD Procurement Toolbox",
-          "tooltip": "A collection of tools &amp; resources to help you manage, enable, or share procurement information",
-          "url": "https://dodprocurementtoolbox.com"
-        },
-        {
-          "name": "DoD Secure Access File Exchange (SAFE)",
-          "tooltip": "Secure file exchange for CUI/PII/PHI files and information",
-          "url": "https://safe.apps.mil/"
-        },
-        {
-          "name": "Joint Deficiency Reporting System (JDRS)",
-          "tooltip": "All Air Force product quality deficiency reports",
-          "url": "https://jdrs.mil/"
-        },
-        {
-          "name": "PEGA / Clarity",
-          "tooltip": "Air Force grant data repository",
-          "url": "https://bpms.ebs.afrl.af.mil/"
-        },
-        {
-          "name": "Procurement Integrated Enterprise Environment (PIEE)",
-          "tooltip": "Primary enterprise procure-to-pay application for DoD. Contains multiple tools &amp; applications",
-          "url": "https://cac.piee.eb.mil/xhtml/unauth/home/login.xhtml"
-        },
-        {
-          "name": "Project Management Resource Tools (PMRT)",
-          "tooltip": "To pull reports from Air Force contract writing systems (including CLIN level data)",
-          "url": "https://pmrt.cce.af.mil/pmrt/#/login?refer=%2F"
-        },
-        {
-          "name": "SIBR",
-          "tooltip": "Contains information about all SBIR/STTR awards and grants",
-          "url": "https://www.sbir.gov"
-        },
-        {
-          "name": "Smart OSI | Orion",
-          "tooltip": "Checks for previous files or activities regarding your subject(s) in addition to I2MS",
-          "url": "https://tvyx-as-012v.area52.afnoapps.usaf.mil/ibmcognos/bi/"
-        },
-        {
-          "name": "Supply Chain Management (SCM) View",
-          "tooltip": "Find out what DAF/DoD program offices are responsible for a NSN",
-          "url": "https://lims-ev.cce.af.mil/scmview/Main.html"
-        },
-        {
-          "name": "Web of Science",
-          "tooltip": "Information about DAF research, including SBIR &amp; STTR awards &amp; grants",
-          "url": "https://www.webofknowledge.com"
-        }
-      ]
-    },
-    {
-      "name": "Product / Service",
-      "children": [
-        {
-          "name": "ASA Aviation Stolen Parts Database",
-          "tooltip": "<div>Listing of stolen aircraft parts.</div>",
-          "url": "http://www.aviationsuppliers.org/Stolen-Parts-Database-Home"
-        },
-        {
-          "name": "Government-Industry Data Exchange Program (GIDEP)",
-          "tooltip": "Technical information shared between companies and USGOV, as well as clearinghouse for counterfeit part alerts for USGOV.",
-          "url": "https://www.gidep.org/"
-        },
-        {
-          "name": "Haystack Gold",
-          "tooltip": "Most comprehensive parts database; can convert part numbers to NSNs.",
-          "url": "https://login.ihserc.com/login/erc?"
-        },
-        {
-          "name": "Joint Deficiency Reporting System (JDRS)",
-          "tooltip": "All AF product quality deficiency reports (PQDR).",
-          "url": "https://www.jdrs.mil/"
-        },
-        {
-          "name": "Product Data Reporting and Evaluation Program (PDREP)",
-          "tooltip": "Product quality deficiency reports (PQDR) for all DoD (may not have all AF).  See JDRS for AF PQDRs.",
-          "url": "https://www.pdrep.csd.disa.mil/default.htm"
-        },
-        {
-          "name": "Supply Chain Management (SCM) View",
-          "tooltip": "Find out what AF and DoD program offices are responsible for an NSN, as well as what next higher assemblies and weapon systems an NSN goes into.",
-          "url": "https://lims-ev.cce.af.mil/scmview/Main.html"
-        },
-        {
-          "name": "Weapon System Information Tool (WSIT)",
-          "tooltip": "Information to determine which weapons systems an NSN belongs to across the DoD.",
-          "url": "https://wsit.xsb.com/start.do"
-        },
-        {
-          "name": "Abraxas",
-          "tooltip": "Use to pull product numbers for products produced; needed for tracking purposes",
-          "url": "nan"
-        },
-        {
-          "name": "Haystack Gold",
-          "tooltip": "Provides part information from 50+ supply part/supply databases in DoD and U.S. Government. Mines Federal Logistics Information System (FLIS) and National and NATO Stock Numbers (NSNs) databases of current and obsolete parts, alternates, and suppliers for military equipment, including current pricing and availability.",
-          "url": "https://login.ihserc.com/cgi-bin/ihslogin?username=JOINTBAB&password=8277674001"
-        },
-        {
-          "name": "Authentic8",
-          "tooltip": "Managed attribution tool",
-          "url": "https://www.asilo.com"
-        },
-        {
-          "name": "Comprehensive Financial Investigative Solution (CFIS)",
-          "tooltip": "Automated software to import/analyze financial data and invoice information",
-          "url": "Requires system config &amp; setup"
-        },
-        {
-          "name": "DoD Secure Access File Exchange (SAFE)",
-          "tooltip": "Secure file exchange for CUI/PII/PHI files and information",
-          "url": "https://safe.apps.mil/"
-        },
-        {
-          "name": "Government Industry Data Exchange Program (GIDEP)",
-          "tooltip": "Clearinghouse for counterfeit part alerts for the USGOV",
-          "url": "https://www.gidep.org"
-        },
-        {
-          "name": "Haystack",
-          "tooltip": "Comprehensive parts database",
-          "url": "https://login.ihserc.com/login/erc?"
-        },
-        {
-          "name": "IBAN Checker",
-          "tooltip": "Check &amp; validate International Bank Account Numbers for errors",
-          "url": "https://www.iban.com/iban-checker"
-        },
-        {
-          "name": "ILS SmartParts",
-          "tooltip": "Parts database - largest world-wide aerospace marketplace &amp; intelligence platform",
-          "url": "https://static.ilsmart.com/pages/ilslogin.htm"
-        },
-        {
-          "name": "Intella",
-          "tooltip": "Enables the processing, searching, filtering imported electronically stored information on subject(s)",
-          "url": "Standalone system"
-        },
-        {
-          "name": "Investigative &amp; Forensic Toolbar",
-          "tooltip": "Tools for searching Cell, IP, Wi-Fi, P2P, Legal, Social Networking and other resources",
-          "url": "https://search.org/toolbar/"
-        },
-        {
-          "name": "Joint Deficiency Reporting System (JDRS)",
-          "tooltip": "All Air Force product quality deficiency reports",
-          "url": "https://jdrs.mil/"
-        },
-        {
-          "name": "Lexis Nexis",
-          "tooltip": "Provider of legal, government, business, and high-tech information sources",
-          "url": "https://www.lexisnexis.com/"
-        },
-        {
-          "name": "Part Target",
-          "tooltip": "Global marketplace for NSN parts, military components, &amp; aircraft/electro-mechanical parts",
-          "url": "https://www.parttarget.com/"
-        },
-        {
-          "name": "Product Data Reporting &amp; Evaluation Program (PDREP)",
-          "tooltip": "Product quality deficiency reports for all of DoD (may not contact all of AF)",
-          "url": "https://www.pdrep.csd.disa.mil/"
-        },
-        {
-          "name": "WB Parts",
-          "tooltip": "Commercial &amp; military aircraft parts supplier - search for over 19 million part numbers",
-          "url": "https://www.wbparts.com/"
-        },
-        {
-          "name": "WCopyFind",
-          "tooltip": "Open source program that compares documents and reports similarities in words/phrases",
-          "url": "https://plagiarism.bloomfieldmedia.com/software/wcopyfind/"
-        },
-        {
-          "name": "Weapon System Impact Tool (WIST)",
-          "tooltip": "To find out what weapons systems a NSN belongs to across the DoD",
-          "url": "https://wsit.xsb.com"
-        },
-        {
-          "name": "Whois Lookup",
-          "tooltip": "Research domain name or IP address ownership",
-          "url": "https://research.domaintools.com/"
-        }
-      ]
-    },
-    {
-      "name": "Contract / Award",
-      "children": [
-        {
-          "name": "DataViser",
-          "tooltip": "An AF-built web-based, intuitive tool that pulls from various financial and contracting databases (primarily D&B Worldbase, USASpending, and SAM) and allows a user to quickly create their own link analyses.",
-          "url": "https:// afosi.dataviser.net/login"
-        },
-        {
-          "name": "Contractor Performance Assessment Reporting System (CPARS)",
-          "tooltip": "Formerly the Past Performance Information Reporting System (PPIRS). Records contain federal contractor criminal, civil, and administrative proceedings in connection with federal awards; suspensions and debarments; administrative agreements; non -responsibility determinations; terminations for cause or default; defective pricing determinations; termination for material failure to comply; subcontractor payment issues; information on trafficking in persons; and recipient not qualified determinations.",
-          "url": "https://www.cpars.gov/"
-        },
-        {
-          "name": "Contracting Business Intelligence Service (CBIS)",
-          "tooltip": "Create your own AF contract reports using hundreds of query filters; useful to understand contracting activity in an specific area of responsibility.",
-          "url": "https://lims-ev.cce.af.mil/"
-        },
-        {
-          "name": "Contractor Reporting Information System (CRIS)",
-          "tooltip": "SAF/GCR case management system for documenting administrative remedy activities.",
-          "url": "http://www.cris.hq.af.mil/"
-        },
-        {
-          "name": "Electronic Documents Access (EDA)",
-          "tooltip": "Search for all contracts across the DoD.",
-          "url": "https://piee.eb.mil/piee-landing/"
-        },
-        {
-          "name": "Electronic Subcontracting Reporting System (eSRS)",
-          "tooltip": "Information related to subcontractors.",
-          "url": "http://www.esrs.gov/"
-        },
-        {
-          "name": "Federal Awardee Performance and Integrity Information System (FAPIIS)",
-          "tooltip": "Publicly available data that includes some information from CPARS, focusing more on adverse actions.",
-          "url": "https://www.fapiis.gov/fapiis/index.action"
-        },
-        {
-          "name": "Contracting Opportunities",
-          "tooltip": "Formerly Federal Business Opportunities (FedBizOpps or FBO); open source USGOV soliciation and contract award system.",
-          "url": "https://sam.gov/content/opportunities"
-        },
-        {
-          "name": "Federal Contractor Misconduct Database (FCMD)",
-          "tooltip": "Watchdog website that tracks contractor misconduct, including fraud, poor performance, and noncontract violations.",
-          "url": "https://www.contractormisconduct.org/"
-        },
-        {
-          "name": "Federal Procurement Data System - Next Generation",
-          "tooltip": "Contract-specific data across the DoD and USGOV.",
-          "url": "https://www.fpds.gov/fpdsng_cms/index.php/en/"
-        },
-        {
-          "name": "Federal Funding Accountability and Transparency Act (FFATA) Subaward Reporting System (FSRS)",
-          "tooltip": "Information related to subcontractors.",
-          "url": "https://fsrs.gov/"
-        },
-        {
-          "name": "System for Award Management (SAM)",
-          "tooltip": "Key contractor information, to include certifications and debarments.",
-          "url": "http://www.sam.gov"
-        },
-        {
-          "name": "Pega (formerly Clarity)",
-          "tooltip": "AF grant data history.",
-          "url": "https://bpms.ebs.afrl.af.mil/"
-        },
-        {
-          "name": "Project Management Resource Tools (PMRT)",
-          "tooltip": "Pull reports from AF contract writing systems (includes CLIN CLIN-level data). Like CBIS, useful to understanding contracting activity in your AOR. but more complex to use than CBIS.",
-          "url": "https://pmrt.altess.army.mil/pmrt/login.jsp"
-        },
-        {
-          "name": "DataViser",
-          "tooltip": "Applies network analysis across complex relationships to identify targets of interest via customized searching, link chart visualization, and collaboration. Provides real-time link analysis between individuals/companies using SAM, FPDS, and USASpending data.",
-          "url": "https://afosi.dataviser.net/login"
-        },
-        {
-          "name": "Federal Procurement Data Source (FPDS)",
-          "tooltip": "Government contract search - search by business",
-          "url": "https://www.fpds.gov/fpdsng_cms/index.php/en/"
-        },
-        {
-          "name": "Pega (Clarity)",
-          "tooltip": "AF Grant data",
-          "url": "https://bpms.ebs.afrl.af.mil/prweb/PRWebLDAP1/SUPg5e3slt_dydffoDByB2pTkNWLuPKc*/!STANDARD?pyActivity=Data-Portal.ShowDesktop"
-        },
-        {
-          "name": "Procurement Integrated Enterprise Environment (PIEE)",
-          "tooltip": "Pull Contracts, identify contracting officer, dates, research",
-          "url": "https://cac.piee.eb.mil/xhtml/unauth/home/login.xhtml?logout=Y"
-        },
-        {
-          "name": "Product Data Reporting and Evaluation Program (PDREP)",
-          "tooltip": "Pull contractor profiles, identify deficiency reports/delays on contract by business",
-          "url": "https://www.pdrep.csd.disa.mil/#"
-        },
-        {
-          "name": "System for Award Management (SAM)",
-          "tooltip": "Determine if and when business was registered",
-          "url": "https://www.sam.gov/SAM/"
-        },
-        {
-          "name": "USA Spending",
-          "tooltip": "Spending data for USG, combines data from FPDS, SAM, FFATA Subaward",
-          "url": "https://www.usaspending.gov/"
-        },
-        {
-          "name": "Contracting Business Intelligence System (CBIS)",
-          "tooltip": "Pulls reports from the Air Force contract writing systems",
-          "url": "https://lims-ev.cce.af.mil/"
-        },
-        {
-          "name": "Contractor Performance Assessment Reporting System (CPARS)",
-          "tooltip": "Records contain federal contractor criminal, civil, and administrative proceedings",
-          "url": "https://www.cpars.gov"
-        },
-        {
-          "name": "DataViser",
-          "tooltip": "Pulls data from D&amp;B, USASpending, SAM and other authoritative databases",
-          "url": "https://afosi.datavisre.net/login"
-        },
-        {
-          "name": "DCMA tool - Provides the ability to view CMT for a CAGE or contract that is in one of DCMA sources",
-          "tooltip": "https://pubmini.dcma.mil/",
-          "url": "nan"
-        },
-        {
-          "name": "DCMA Contract Management Team (CMT)",
-          "tooltip": "DCMA tool - Provides the ability to view CMT for a CAGE or contract that is in one of DCMA sources",
-          "url": "https://pubmini.dcma.mil/"
-        },
-        {
-          "name": "Defense SBIR/STTR Innovation Portal (DSIP)",
-          "tooltip": "SBIR/STTR Innovation Portal",
-          "url": "https://www.dodsbirsttr.mil/ehb-app/home"
-        },
-        {
-          "name": "DoD Procurement Toolbox",
-          "tooltip": "A collection of tools &amp; resources to help you manage, enable, or share procurement information",
-          "url": "https://dodprocurementtoolbox.com"
-        },
-        {
-          "name": "Electronic Data Access (EDA)",
-          "tooltip": "Enables searches for contracts across the DoD",
-          "url": "https://piee.eb.mil/piee-landing/"
-        },
-        {
-          "name": "Electronic Subcontracting Reporting System (eSRS)",
-          "tooltip": "Contains information related to subcontractors",
-          "url": "https://www.esrs.gov"
-        },
-        {
-          "name": "Fed Awardee Performance Integrity Information System (FAPIIIS)",
-          "tooltip": "Includes information from CPARs &amp; PPIRs - focuses more on adverse actions",
-          "url": "https://www.fapiis.gov/fapiis/index.action"
-        },
-        {
-          "name": "Federal Procurement Data System (FPDS)",
-          "tooltip": "Allows searches for all contracts across the DoD and USGOV",
-          "url": "https://www.fpds/gov/fpdsng_cms/index.php/en/"
-        },
-        {
-          "name": "PEGA / Clarity",
-          "tooltip": "Air Force grant data repository",
-          "url": "https://bpms.ebs.afrl.af.mil/"
-        },
-        {
-          "name": "Procurement Integrated Enterprise Environment (PIEE)",
-          "tooltip": "Primary enterprise procure-to-pay application for DoD. Contains multiple tools &amp; applications",
-          "url": "https://cac.piee.eb.mil/xhtml/unauth/home/login.xhtml"
-        },
-        {
-          "name": "Project Management Resource Tools (PMRT)",
-          "tooltip": "To pull reports from Air Force contract writing systems (including CLIN level data)",
-          "url": "https://pmrt.cce.af.mil/pmrt/#/login?refer=%2F"
-        },
-        {
-          "name": "SIBR",
-          "tooltip": "Contains information about all SBIR/STTR awards and grants",
-          "url": "https://www.sbir.gov"
-        },
-        {
-          "name": "System for Award Management (SAM)",
-          "tooltip": "To look up key contractor information to include certifications and debarments",
-          "url": "https://sam.gov/SAM"
-        },
-        {
-          "name": "USA Spending",
-          "tooltip": "The official open data source of federal spending information",
-          "url": "https://www.usaspending.com"
-        }
-      ]
-    },
-    {
-      "name": "Location",
-      "children": [
-        {
-          "name": "CoreLogic",
-          "tooltip": "Residential property database that allows users to discover real estate assets linked to subjects.",
-          "url": "https://www.corelogic.com"
-        },
-        {
-          "name": "ARC",
-          "tooltip": "Travel bookings search tool",
-          "url": "https://tip.arc.travel/"
-        },
-        {
-          "name": "Core Logic",
-          "tooltip": "Real estate asset information",
-          "url": "https://pro.realquest.com/"
-        },
-        {
-          "name": "Defense Travel System (DTS)",
-          "tooltip": "Search on subject's leave and travel",
-          "url": "https://dtsproweb.defensetravel.osd.mil/dts-app/pubsite/dashboard"
-        },
-        {
-          "name": "Treasury Enforcement Communication System (TECS)",
-          "tooltip": "Owned by CBP, travel history, lookouts, derog info on subject or business",
-          "url": "nan"
-        },
-        {
-          "name": "Accurint",
-          "tooltip": "Compiles publicly available information on individuals and businesses",
-          "url": "https://secure.accurint.com/app/bps/main"
-        },
-        {
-          "name": "Accurint - Virtual Crime Center (VCC)",
-          "tooltip": "Search people, vehicles, phones, bookings, virtual identities, &amp; businesses",
-          "url": "https://avcc.lexisnexisrisk.com/"
-        },
-        {
-          "name": "Core Logic / RealQuest",
-          "tooltip": "Residential property database &amp; real estate assets linked to subject(s)",
-          "url": "https://pro.realquest.com/"
-        },
-        {
-          "name": "Consular Consolidated Database (CCD)",
-          "tooltip": "Provided by the Department of State. Contains Passport and POE passenger information",
-          "url": "Limited access provided to OSI, available thru ICON"
-        },
-        {
-          "name": "DODAAC",
-          "tooltip": "Use to search Department of Defense Activity Address Code (DoDAAC)",
-          "url": "https://dodaac.cce.af.mil/DODAAC.aspx"
-        },
-        {
-          "name": "Enhanced Law Enforcement Plaform - ELEP/IVR",
-          "tooltip": "Determine all phone carriers historically linked to a number",
-          "url": "https://lawenforcement.numberportability.com"
-        },
-        {
-          "name": "Investigative &amp; Forensic Toolbar",
-          "tooltip": "Tools for searching Cell, IP, Wi-Fi, P2P, Legal, Social Networking and other resources",
-          "url": "https://search.org/toolbar/"
-        },
-        {
-          "name": "Public Records Online Directory | NETRONLINE",
-          "tooltip": "Public records including deeds, mortgages, assessment data, tax details, &amp; parcel maps",
-          "url": "https://publicrecords.netronline.com/usir/UsirApp/index.jsp"
-        },
-        {
-          "name": "TECS",
-          "tooltip": "CBP passenger data for border crossings",
-          "url": "Currently unavailable - pending access request"
-        }
-      ]
-    },
-    {
-      "name": "Regulatory / Legal",
-      "children": [
-        {
-          "name": "DoD Law Enforcement Defense Data Exchange (D D-Dex)",
-          "tooltip": "Criminal records information; supplements NCIC checks.",
-          "url": "https://www.le-ddex.us/ddex/login.jsp"
-        },
-        {
-          "name": "National Crime Information Center (NCIC)",
-          "tooltip": "Criminal records information, as well as gun and vehicle registrations.",
-          "url": "http://hqosincicact.us.af.mil:8080/AFO/"
-        },
-        {
-          "name": "TECS",
-          "tooltip": "All CBP passenger data for border crossings.",
-          "url": "Pending"
-        },
-        {
-          "name": "Law Enforcement Enterprise Portal (LEEP)",
-          "tooltip": "Intel products from local, state, and federal law enforcement partners, as well as information sharing capabilities for LES info.  Includes access to eGuardian.",
-          "url": "https://www.cjis.gov/CJISEAI/EAIController"
-        },
-        {
-          "name": "Enhanced Law Enforcement Platform ( ELEP) & Interactive Voice Response (IVR)",
-          "tooltip": "Determine all phone carriers historically linked to a number, which can help determine what carriers to subpoena for records.",
-          "url": "https://lawenforcement.numberportability.com/"
-        },
-        {
-          "name": "National Insurance Crime Bureau (NICB) License Plate Reader (LPR)",
-          "tooltip": "NICB database capitalizes on LPR technology across the U.S. Consolidated data enables finding missing vehicles or past locations.",
-          "url": "nan"
-        },
-        {
-          "name": "DDEX",
-          "tooltip": "Law Enforcement Sharing via DOD",
-          "url": "https://www.le-ddex.us/ddex/login.jsp"
-        },
-        {
-          "name": "Intellectual Property Rights Center (IPRC)",
-          "tooltip": "Business search of import/export/seizure data and deconfliction among IPRC members",
-          "url": "nan"
-        },
-        {
-          "name": "Law Enforcement Enterprise Portal (LEEP)",
-          "tooltip": "Multiple resources for LE and CI investigations include: Virtual Command Center (real-time information sharing on active shooter incidents, terrorist attacks, etc.); JusticeConnect (online forum with experts and colleagues); Active Shooter Resources SIG); N-DEx; National Gang Intelligence Center; eGuardian; and more.",
-          "url": "https://www.cjis.gov/CJISEAI/TAMOperationHandler?TAM_OP=login&ERROR_CODE=0x00000000&URL=%2Fccdi%2Fccdi.html&AUTHNLEVEL="
-        },
-        {
-          "name": "National Crime Information Center (NCIC)",
-          "tooltip": "Criminal History Checks, Vehicle info, warrants",
-          "url": "http://hqosincicact.us.af.mil:8080/AFO/"
-        },
-        {
-          "name": "Treasury Enforcement Communication System (TECS)",
-          "tooltip": "Owned by CBP, travel history, lookouts, derog info on subject or business",
-          "url": "nan"
-        },
-        {
-          "name": "BSA Portal (FinCen)",
-          "tooltip": "Search suspicious financial transactions &amp; locate financial assets | 314a Program, Egmont",
-          "url": "https://bsasearch.fincen.gov/"
-        },
-        {
-          "name": "Consolidated Screening List (CSL)",
-          "tooltip": "A list of parties for which the USG maintains restrictions on exports, reexports, or transfers of items",
-          "url": "https://www.trade.gov/consolidated-screening-list"
-        },
-        {
-          "name": "Contractor Performance Assessment Reporting System (CPARS)",
-          "tooltip": "Records contain federal contractor criminal, civil, and administrative proceedings",
-          "url": "https://www.cpars.gov"
-        },
-        {
-          "name": "D-Dex / NCIC",
-          "tooltip": "Criminal records information",
-          "url": "https://www.le-ddex.us/ddex/login.jsp"
-        },
-        {
-          "name": "Defense Central Index of Investigations (DCII)",
-          "tooltip": "Use to determine if subject(s) have had previous investigations within DoD",
-          "url": "https://www.dcsa.mil/is/dcii"
-        },
-        {
-          "name": "DoD Secure Access File Exchange (SAFE)",
-          "tooltip": "Secure file exchange for CUI/PII/PHI files and information",
-          "url": "https://safe.apps.mil/"
-        },
-        {
-          "name": "Fed Awardee Performance Integrity Information System (FAPIIIS)",
-          "tooltip": "Includes information from CPARs &amp; PPIRs - focuses more on adverse actions",
-          "url": "https://www.fapiis.gov/fapiis/index.action"
-        },
-        {
-          "name": "Federal Contractor Misconduct Database (FCMD)",
-          "tooltip": "Watchdog website that tracks contractor misconduct",
-          "url": "https://www.contractormisconduct.org"
-        },
-        {
-          "name": "Government Industry Data Exchange Program (GIDEP)",
-          "tooltip": "Clearinghouse for counterfeit part alerts for the USGOV",
-          "url": "https://www.gidep.org"
-        },
-        {
-          "name": "Law Enforcement Enterprise Portal (LEEP)",
-          "tooltip": "Intel products from local, state, &amp; federal LE partners",
-          "url": "https://www.cjis.gov/"
-        },
-        {
-          "name": "Lexis Nexis",
-          "tooltip": "Provider of legal, government, business, and high-tech information sources",
-          "url": "https://www.lexisnexis.com/"
-        },
-        {
-          "name": "Public Access to Court Electronic Records (PACER)",
-          "tooltip": "Court records database, historical court proceedings associated with subject(s)",
-          "url": "https://pacer.uscourts.gov"
-        },
-        {
-          "name": "Securities &amp; Exchange Commission | EDGAR",
-          "tooltip": "Access documents filed by publicly traded companies",
-          "url": "https://www.sec.gov/search-filings"
-        },
-        {
-          "name": "System for Award Management (SAM)",
-          "tooltip": "To look up key contractor information to include certifications and debarments",
-          "url": "https://sam.gov/SAM"
-        }
-      ]
-    },
-    {
-      "name": "Uncategorized",
-      "children": [
-        {
-          "name": "DPS",
-          "tooltip": "nan",
-          "url": "nan"
-        },
-        {
-          "name": "Sharepoint Site",
-          "tooltip": "nan",
-          "url": "https://usaf.dps.mil/sites/afosi-hq/XI/AC/SitePages/Home.aspx"
-        }
-      ]
-    },
-    {
-      "name": "Relationships",
-      "children": [
-        {
-          "name": "Contractor Responsibility Information System (CRIS)",
-          "tooltip": "Use to determine if SAF/GCR had a previous file or information on subject(s)",
-          "url": "https://www.cris.hq.af.mil"
-        },
-        {
-          "name": "Defense Central Index of Investigations (DCII)",
-          "tooltip": "Use to determine if subject(s) have had previous investigations within DoD",
-          "url": "https://www.dcsa.mil/is/dcii"
-        },
-        {
-          "name": "Electronic Subcontracting Reporting System (eSRS)",
-          "tooltip": "Contains information related to subcontractors",
-          "url": "https://www.esrs.gov"
-        },
-        {
-          "name": "Glassdoor",
-          "tooltip": "US website where current and former employees can review companies",
-          "url": "https://www.glassdoor.com/"
-        },
-        {
-          "name": "Smart OSI | Orion",
-          "tooltip": "Checks for previous files or activities regarding your subject(s) in addition to I2MS",
-          "url": "https://tvyx-as-012v.area52.afnoapps.usaf.mil/ibmcognos/bi/"
-        }
-      ]
-    },
-    {
-      "name": "Temporal Marker",
-      "children": [
-        {
-          "name": "TECS",
-          "tooltip": "CBP passenger data for border crossings",
-          "url": "Currently unavailable - pending access request"
+          "name": "SUBJECT",
+          "children": [
+            {
+              "name": "National Crime Information Center (NCIC)",
+              "tooltip": "Criminal History Checks, Vehicle info, warrants",
+              "url": "hqosincicact.us.af.mil:8080"
+            },
+            {
+              "name": "DataViser",
+              "tooltip": "An AF-built web-based, intuitive tool that pulls from various financial and contracting databases (primarily D&B Worldbase, USASpending, and SAM) and allows a user to quickly create their own link analyses. (c ) ",
+              "url": "afosi.dataviser.net"
+            },
+            {
+              "name": "SkopeNow",
+              "tooltip": "Fraud detection tool using social media analysis, people search, background checks, digital records, and reverse lookups. Allows for non-attribution web searching.",
+              "url": "app.skopenow.com"
+            },
+            {
+              "name": "Accurint - Virtual Crime Center (VCC)",
+              "tooltip": "Search people, vehicles, phones, bookings, virtual identities, &amp; businesses",
+              "url": "avcc.lexisnexisrisk.com"
+            },
+            {
+              "name": "DCII-new",
+              "tooltip": "\u00a0Likely a new version of the Defense Critical Infrastructure Information program.",
+              "url": "dcii.nbis.mil"
+            },
+            {
+              "name": "i2MS",
+              "tooltip": "OSI Case Management System",
+              "url": "webi2ms.us.af.mil"
+            },
+            {
+              "name": "Core Logic / RealQuest",
+              "tooltip": "Residential property database that allows users to discover real estate assets linked to subjects.",
+              "url": "www.corelogic.com"
+            },
+            {
+              "name": "Contractor Performance Assessment Reporting System (CPARS)",
+              "tooltip": "Formerly the Past Performance Information Reporting System (PPIRS). Records contain federal contractor criminal, civil, and administrative proceedings in connection with federal awards; suspensions and debarments; administrative agreements; non -responsibility determinations; terminations for cause or default; defective pricing determinations; termination for material failure to comply; subcontractor payment issues; information on trafficking in persons; and recipient not qualified determinations.",
+              "url": "www.cpars.gov"
+            },
+            {
+              "name": "Defense Personnel Records Information Retrieval System (DPRIS)",
+              "tooltip": "Military Recs",
+              "url": "www.dpris.dod.mil"
+            },
+            {
+              "name": "AFJIS",
+              "tooltip": NaN,
+              "url": "Unavailable"
+            },
+            {
+              "name": "DPS",
+              "tooltip": NaN,
+              "url": "Unavailable"
+            },
+            {
+              "name": "PRP",
+              "tooltip": NaN,
+              "url": "Unavailable"
+            },
+            {
+              "name": "Treasury Enforcement Communication System (TECS)",
+              "tooltip": "Owned by CBP, travel history, lookouts, derog info on subject or business (I)",
+              "url": "Unavailable"
+            }
+          ]
+        },
+        {
+          "name": "COMPANY",
+          "children": [
+            {
+              "name": "DataViser",
+              "tooltip": "An AF-built web-based, intuitive tool that pulls from various financial and contracting databases (primarily D&B Worldbase, USASpending, and SAM) and allows a user to quickly create their own link analyses. (c ) ",
+              "url": " afosi.dataviser.net"
+            },
+            {
+              "name": "Electronic Documents Access (EDA)",
+              "tooltip": "Enables searches for contracts across the DoD",
+              "url": "piee.eb.mil"
+            },
+            {
+              "name": "Core Logic / RealQuest PRO",
+              "tooltip": "Residential property database &amp; real estate assets linked to subject(s)",
+              "url": "pro.realquest.com"
+            },
+            {
+              "name": "DCMA Contract Management Team (CMT)",
+              "tooltip": "DCMA tool - Provides the ability to view CMT for a CAGE or contract that is in one of DCMA sources",
+              "url": "pubmini.dcma.mil"
+            },
+            {
+              "name": "Accurint/Lexis Nexis",
+              "tooltip": "Commercial database to run names, businesses",
+              "url": "secure.accurint.com"
+            },
+            {
+              "name": "Contractor Performance Assessment Reporting System (CPARS)",
+              "tooltip": "Formerly the Past Performance Information Reporting System (PPIRS). Records contain federal contractor criminal, civil, and administrative proceedings in connection with federal awards; suspensions and debarments; administrative agreements; non -responsibility determinations; terminations for cause or default; defective pricing determinations; termination for material failure to comply; subcontractor payment issues; information on trafficking in persons; and recipient not qualified determinations.",
+              "url": "www.cpars.gov"
+            },
+            {
+              "name": "Financial Crimes Enforcement Network (FINCEN)",
+              "tooltip": "Reports of SARs, CTRs, FBARs, 8300 filings from financial institutions",
+              "url": "www.fincen.gov"
+            },
+            {
+              "name": "Glassdoor",
+              "tooltip": "Open source information regarding reviews of companies by current and former employees.",
+              "url": "www.glassdoor.com"
+            },
+            {
+              "name": "SkopeNow",
+              "tooltip": "Fraud detection tool using social media analysis, people search, background checks, digital records, and reverse lookups. Allows for non-attribution web searching.",
+              "url": "www.skopenow.com"
+            }
+          ]
+        },
+        {
+          "name": "PARTS",
+          "children": [
+            {
+              "name": "Supply Chain Management (SCM) View",
+              "tooltip": "Find out what AF and DoD program offices are responsible for an NSN, as well as what next higher assemblies and weapon systems an NSN goes into.",
+              "url": "lims-ev.cce.af.mil"
+            },
+            {
+              "name": "Haystack",
+              "tooltip": "Provides part information from 50+ supply part/supply databases in DoD and U.S. Government. Mines Federal Logistics Information System (FLIS) and National and NATO Stock Numbers (NSNs) databases of current and obsolete parts, alternates, and suppliers for military equipment, including current pricing and availability.",
+              "url": "login.ihserc.com"
+            },
+            {
+              "name": "Weapon System Impact Tool (WIST)",
+              "tooltip": "Information to determine which weapons systems an NSN belongs to across the DoD.",
+              "url": "wsit.xsb.com"
+            },
+            {
+              "name": "Government Industry Data Exchange Program (GIDEP)",
+              "tooltip": "Technical information shared between companies and USGOV, as well as clearinghouse for counterfeit part alerts for USGOV.",
+              "url": "www.gidep.org"
+            },
+            {
+              "name": "Joint Deficiency Reporting System (JDRS)",
+              "tooltip": "All Air Force product quality deficiency reports",
+              "url": "www.jdrs.mil"
+            },
+            {
+              "name": "Product Data Reporting and Evaluation Program (PDREP)",
+              "tooltip": "Product quality deficiency reports (PQDR) for all DoD (may not have all AF).  See JDRS for AF PQDRs.",
+              "url": "www.pdrep.csd.disa.mil"
+            },
+            {
+              "name": "Intellectual Property Rights Center (IPRC)",
+              "tooltip": "Business search of import/export/seizure data and deconfliction among IPRC members",
+              "url": "Unavailable"
+            }
+          ]
         }
       ]
     }
   ]
 };
 
+    // === TREE CONFIGURATION ===
     const width = 960;
-    const dx = 30;
-    const dy = width / 4;
+    const dx = 30;                // Vertical spacing between nodes
+    const dy = width / 4;         // Horizontal spacing between levels
+
     const tree = d3.tree().nodeSize([dx, dy]);
     const diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x);
+
+    // === BUILD ROOT FROM DATA ===
     const root = d3.hierarchy(data);
     root.x0 = dy / 2;
     root.y0 = 0;
     root.descendants().forEach((d, i) => {
       d.id = i;
       d._children = d.children;
+
+      // Customize this filter to collapse nodes based on logic
       if (d.depth && d.data.name.length !== 7) d.children = null;
     });
 
+    // === SVG SETUP ===
     const svg = d3.select("#tree-container")
-      .attr("viewBox", [-dy / 3, -dx * 10, width, 600])
+      .attr("viewBox", [-dy / 3, -dx * 10, width, 600]) // Adjust view box to fit content
       .style("font", "10px sans-serif")
       .style("user-select", "none");
 
+    // === LINK GROUP ===
     const gLink = svg.append("g")
       .attr("fill", "none")
-      .attr("stroke", "#555")
+      .attr("stroke", "#4B9CD3")             // Line color between nodes
       .attr("stroke-opacity", 0.4)
       .attr("stroke-width", 1.5);
 
+    // === NODE GROUP ===
     const gNode = svg.append("g")
       .attr("cursor", "pointer")
       .attr("pointer-events", "all");
 
     const tooltip = d3.select("#tooltip");
 
+    // === MAIN UPDATE FUNCTION ===
     function update(source) {
       const duration = 250;
       const nodes = root.descendants().reverse();
@@ -1300,8 +2890,8 @@
 
       tree(root);
 
-      let left = root;
-      let right = root;
+      // === DYNAMIC TREE HEIGHT ===
+      let left = root, right = root;
       root.eachBefore(node => {
         if (node.x < left.x) left = node;
         if (node.x > right.x) right = node;
@@ -1310,69 +2900,79 @@
       const transition = svg.transition().duration(duration)
         .attr("viewBox", [-dy / 3, left.x - dx * 2, width, right.x - left.x + dx * 4]);
 
+      // === NODE JOIN ===
       const node = gNode.selectAll("g").data(nodes, d => d.id);
 
+      // === NEW NODES ENTER ===
       const nodeEnter = node.enter().append("g")
         .attr("transform", d => `translate(${source.y0},${source.x0})`)
         .on("click", (event, d) => {
           if (d.data.url && !d.children && !d._children) {
-            window.open(d.data.url, "_blank");
+            window.open(d.data.url, "_blank");  // Open links in new tab
           } else {
             d.children = d.children ? null : d._children;
-            update(d);
+            update(d);  // Toggle children
           }
         })
         .on("mouseover", (event, d) => {
-          tooltip.html(d.data.tooltip || d.data.name)
+          tooltip.html(d.data.tooltip || d.data.name)  // Tooltip logic
             .style("left", `${event.pageX + 10}px`)
             .style("top", `${event.pageY}px`)
             .style("opacity", 1);
         })
         .on("mouseout", () => tooltip.style("opacity", 0));
 
+      // === CIRCLE STYLE ===
       nodeEnter.append("circle")
-        .attr("r", 4)
-        .attr("fill", d => d._children ? "#555" : "#999");
+        .attr("r", 4)                     // Radius of nodes
+        .attr("fill", d => d._children ? "#00308F" : "#00205B");  // Collapsed = darker
 
+      // === TEXT STYLE ===
       nodeEnter.append("text")
-        .attr("dy", "0.31em")
-        .attr("x", d => d._children ? -6 : 6)
-        .attr("text-anchor", d => d._children ? "end" : "start")
+        .attr("dy", "-0.37em") // vertical alignment
+        .attr("x", d => d._children ? -6 : 6) // horizontal offset from the node
+        .attr("text-anchor", d => d._children ? "end" : "start") // text alignment
         .text(d => d.data.name)
         .clone(true).lower()
-        .attr("stroke", "white");
+        .attr("stroke", "white");        // Outline for better contrast
 
+      // === NODE UPDATE TRANSITION ===
       node.merge(nodeEnter).transition(transition)
         .attr("transform", d => `translate(${d.y},${d.x})`);
 
+      // === NODE EXIT TRANSITION ===
       node.exit().transition(transition).remove()
         .attr("transform", d => `translate(${source.y},${source.x})`)
         .attr("opacity", 0);
 
+      // === LINK JOIN ===
       const link = gLink.selectAll("path").data(links, d => d.target.id);
 
+      // === NEW LINKS ===
       const linkEnter = link.enter().append("path")
         .attr("d", d => {
           const o = d.source.depth === 0
-            ? { x: d.source.x, y: d.source.y + 40 }
+            ? { x: d.source.x, y: d.source.y + 40 }  // Offset root link
             : d.source;
           return diagonal({ source: o, target: d.target });
         });
 
+      // === LINK TRANSITIONS ===
       link.merge(linkEnter).transition(transition).attr("d", diagonal);
-
       link.exit().transition(transition).remove()
         .attr("d", d => {
           const o = { x: source.x, y: source.y };
           return diagonal({ source: o, target: o });
         });
 
+      // Update saved positions
       root.eachBefore(d => {
         d.x0 = d.x;
         d.y0 = d.y;
       });
     }
 
+    // === INITIAL DRAW ===
     update(root);
   </script>
 </body>
