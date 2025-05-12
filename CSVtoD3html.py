@@ -7,7 +7,7 @@ import pandas as pd
 from urllib.parse import urlparse
 
 # --- Config ---
-csv_path = <<PATH>>
+csv_path = "https://github.com/2theEast/PFIF/blob/main/USAF_PFIF_Tree.csv"
 
 # --- Helpers ---
 
